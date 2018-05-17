@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ElementRef,Renderer2, ViewChild, HostListener, ContentChild, Input } from '@angular/core';
+import { Component, AfterViewInit, ElementRef,Renderer2, ViewChild, HostListener, ContentChild, Input, Output, EventEmitter } from '@angular/core';
 
 
 @Component({
@@ -10,7 +10,9 @@ export class SquareComponent implements AfterViewInit{
   @ViewChild('someVar') el:ElementRef;
   // @ContentChild('parentSlider') parent:ElementRef;
   @Input() howLong;
-  @Input() position = 0;
+  @Input() position: number;
+
+  @Output() squarePos: EventEmitter<number> = new EventEmitter<number>();
 
   parentSlider
   colorChange: boolean = true;
@@ -21,6 +23,7 @@ export class SquareComponent implements AfterViewInit{
 
   constructor(private rd: Renderer2, private elemRef: ElementRef) {
     this.isDown = false;
+    
   }
 
   @HostListener('document:click', ['$event'])
@@ -57,6 +60,7 @@ export class SquareComponent implements AfterViewInit{
             case "mouseup": {
               this.isDown = false;
               this.rd.setStyle(this.elemRef.nativeElement.lastElementChild, 'background-color', 'white');
+              this.squarePos.emit(this.elemRef.nativeElement.lastElementChild.offsetLeft);
               break;
             }
 
@@ -91,6 +95,7 @@ export class SquareComponent implements AfterViewInit{
   ngAfterViewInit() {
     console.log("ready");
     this.isDown = false;
+    this.rd.setStyle(this.elemRef.nativeElement.lastElementChild, 'left', this.position + 'px');
     // console.log("di I get el:" + this.el.nativeElement);
     // console.log("Child is here: " + this.el.nativeElement.offsetLeft + " " + this.el.nativeElement.offsetTop);
     //console.log(this.elemRef.nativeElement.children[0].innerText);

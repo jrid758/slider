@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ElementRef,Renderer2, ViewChild, HostListener, ViewChildren, QueryList } from '@angular/core';
+import { Component, AfterViewInit, ElementRef,Renderer2, ViewChild, HostListener, ViewChildren, QueryList, Input } from '@angular/core';
 import { SquareComponent } from './square/square.component';
 // import { SquareComponent } from './square/square.component';
 
@@ -17,6 +17,9 @@ export class SliderComponent implements AfterViewInit{
   offsetX: number;
   isDown: boolean = false;
   parentWidth: number = 500;
+
+  @Input() BeginningPos: number;
+  @Input() EndingPos: number;
   
   constructor(private rd: Renderer2, private elemRef: ElementRef) {
   
@@ -32,6 +35,11 @@ export class SliderComponent implements AfterViewInit{
     //     console.log(item.nativeElement.numberX);
     // });
     // console.log(this.squares._);
+
+  }
+
+  updatePos(number: number): void {
+    console.log(`On number: ${number}`);
 
   }
 
