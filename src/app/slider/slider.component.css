@@ -1,0 +1,22 @@
+* {
+    box-sizing: border-box;
+}
+
+.slider {
+    background-color: rgb(25, 0, 255);
+    width: 500px;
+    height: 60px;
+    position: relative; 
+}
+
+.between {
+    background-color: rgb(5, 255, 17);
+    height: 60px;
+    width: 30px;
+    display: inline-block;
+    position: absolute; 
+    left: 10px;
+}
+
+
+
