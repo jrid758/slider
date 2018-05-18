@@ -12,11 +12,16 @@ export class SliderComponent implements AfterViewInit{
  
 
   @ViewChild('parentSlider') parentRef:ElementRef;
-  @ViewChildren('positionSquare') squares: QueryList<ElementRef>;
+  @ViewChild('between') between:ElementRef;
+  // @ViewChildren('positionSquare') squares: QueryList<ElementRef>;
+  @ViewChildren(SquareComponent) squares: QueryList<SquareComponent>;
+
+
 
   offsetX: number;
   isDown: boolean = false;
   parentWidth: number = 500;
+  howLongSpace: number;
 
   @Input() BeginningPos: number;
   @Input() EndingPos: number;
@@ -29,7 +34,22 @@ export class SliderComponent implements AfterViewInit{
 
   ngAfterViewInit() {
     this.parentWidth = this.parentRef.nativeElement.offsetWidth;
+    // this.squares.changes;
     console.log(this.squares)
+
+    this.squares.changes.subscribe( () => {
+
+      console.log("update");
+      //this.saySomething();
+      // this.howLongSpace = this.squares.last.position - this.squares.first.position;
+      // this.rd.setStyle(this.between.nativeElement, 'left', this.squares.first + 'px');
+      // this.rd.setStyle(this.between.nativeElement, 'width', this.howLongSpace + 'px');
+       }
+    )
+  
+
+
+    
     // this.squares.forEach((item: ElementRef) => {
     //     console.log("These numbers: ");
     //     console.log(item.nativeElement.numberX);
@@ -38,9 +58,17 @@ export class SliderComponent implements AfterViewInit{
 
   }
 
+  private saySomething() {
+    console.log("Hello");
+  }
+
   updatePos(number: number): void {
     console.log(`On number: ${number}`);
 
+  }
+
+  getUpdatedPositionsSquares() {
+    console.log(this.squares)
   }
 
   // whatToDo(event) {

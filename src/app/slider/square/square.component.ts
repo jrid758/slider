@@ -60,6 +60,7 @@ export class SquareComponent implements AfterViewInit{
             case "mouseup": {
               this.isDown = false;
               this.rd.setStyle(this.elemRef.nativeElement.lastElementChild, 'background-color', 'white');
+              this.position = this.elemRef.nativeElement.lastElementChild.offsetLeft;
               this.squarePos.emit(this.elemRef.nativeElement.lastElementChild.offsetLeft);
               break;
             }
