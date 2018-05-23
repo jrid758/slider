@@ -6,18 +6,11 @@
     background-color: rgb(25, 0, 255);
     width: 500px;
     height: 60px;
-    position: relative; 
+    position: relative;
+    /* pointer-events: none;  */
 }
 
-.between {
-    background-color: rgb(5, 255, 17);
-    height: 60px;
-    width: 30px;
-    display: inline-block;
-    position: absolute; 
-    left: 10px;
-    z-index: 0;
-}
+
 
 
 

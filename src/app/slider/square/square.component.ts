@@ -9,10 +9,13 @@ import { Component, AfterViewInit, ElementRef,Renderer2, ViewChild, HostListener
 export class SquareComponent implements AfterViewInit{
   @ViewChild('someVar') el:ElementRef;
   // @ContentChild('parentSlider') parent:ElementRef;
-  @Input() howLong;
-  @Input() position: number;
 
-  @Output() squarePos: EventEmitter<number> = new EventEmitter<number>();
+  @Input() set position(val) {
+    this.rd.setStyle(this.elemRef.nativeElement.lastElementChild, 'left', val + 'px');
+    console.log("fire");
+  } 
+
+  @Output() moved: EventEmitter<number> = new EventEmitter<number>();
 
   parentSlider
   colorChange: boolean = true;
@@ -26,7 +29,7 @@ export class SquareComponent implements AfterViewInit{
     
   }
 
-  @HostListener('document:click', ['$event'])
+  // @HostListener('document:click', ['$event'])
   @HostListener('mouseover', ['$event'])
   @HostListener('document:mouseout', ['$event'])
   @HostListener('mousedown', ['$event'])
@@ -51,6 +54,7 @@ export class SquareComponent implements AfterViewInit{
                   // console.log("elemRef");
                   // console.log(this.elemRef);
                   this.rd.setStyle(this.elemRef.nativeElement.lastElementChild, 'left', (x + this.offsetX) + 'px');
+                  this.moved.emit(this.elemRef.nativeElement.lastElementChild.offsetLeft);
                   //this.rd.setStyle(this.elemRef.nativeElement.lastElementChild, 'left', this.posOffest + 'px');
                   break;
                 }
@@ -59,9 +63,8 @@ export class SquareComponent implements AfterViewInit{
 
             case "mouseup": {
               this.isDown = false;
-              this.rd.setStyle(this.elemRef.nativeElement.lastElementChild, 'background-color', 'white');
-              this.position = this.elemRef.nativeElement.lastElementChild.offsetLeft;
-              this.squarePos.emit(this.elemRef.nativeElement.lastElementChild.offsetLeft);
+              this.rd.setStyle(this.elemRef.nativeElement.lastElementChild, 'background-color', 'orange');
+             
               break;
             }
 
@@ -79,7 +82,7 @@ export class SquareComponent implements AfterViewInit{
             }
 
             case "mouseout": {
-              this.rd.setStyle(this.elemRef.nativeElement.lastElementChild, 'background-color', 'red');
+              //this.rd.setStyle(this.elemRef.nativeElement.lastElementChild, 'background-color', 'red');
               break;
             }
 
@@ -96,7 +99,7 @@ export class SquareComponent implements AfterViewInit{
   ngAfterViewInit() {
     console.log("ready");
     this.isDown = false;
-    this.rd.setStyle(this.elemRef.nativeElement.lastElementChild, 'left', this.position + 'px');
+    
     // console.log("di I get el:" + this.el.nativeElement);
     // console.log("Child is here: " + this.el.nativeElement.offsetLeft + " " + this.el.nativeElement.offsetTop);
     //console.log(this.elemRef.nativeElement.children[0].innerText);

@@ -1,0 +1,13 @@
+* {
+    box-sizing: border-box;
+}
+
+
+.between {
+    background-color: rgb(5, 255, 17);
+    height: 60px;
+    width: 300px;
+    display: inline-block;
+    position: absolute; 
+    left: 30px;
+}

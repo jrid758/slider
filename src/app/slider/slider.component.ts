@@ -1,6 +1,9 @@
-import { Component, AfterViewInit, ElementRef,Renderer2, ViewChild, HostListener, ViewChildren, QueryList, Input } from '@angular/core';
+import { Component, AfterViewInit, ElementRef,Renderer2, ViewChild, HostListener, ViewChildren, QueryList, Input, Directive, OnInit } from '@angular/core';
 import { SquareComponent } from './square/square.component';
 // import { SquareComponent } from './square/square.component';
+
+
+
 
 
 @Component({
@@ -8,44 +11,50 @@ import { SquareComponent } from './square/square.component';
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.css']
 })
-export class SliderComponent implements AfterViewInit{
+export class SliderComponent implements OnInit, AfterViewInit {
  
 
+  
   @ViewChild('parentSlider') parentRef:ElementRef;
-  @ViewChild('between') between:ElementRef;
+  
   // @ViewChildren('positionSquare') squares: QueryList<ElementRef>;
   @ViewChildren(SquareComponent) squares: QueryList<SquareComponent>;
 
 
 
   offsetX: number;
+  offsetSquareS: number;
+  offsetSquareE: number;
   isDown: boolean = false;
-  parentWidth: number = 500;
   howLongSpace: number;
+
+  squareEnd: number;
+  squareBegin: number;
 
   @Input() BeginningPos: number;
   @Input() EndingPos: number;
+
+
   
   constructor(private rd: Renderer2, private elemRef: ElementRef) {
-  
+    this.squareEnd = this.EndingPos;
+    this.squareBegin = this.BeginningPos;
+    
+
   }
 
+  ngOnInit(): void {
+    this.squareEnd = this.EndingPos;
+    this.squareBegin = this.BeginningPos;
+  }
   
 
   ngAfterViewInit() {
-    this.parentWidth = this.parentRef.nativeElement.offsetWidth;
+  
     // this.squares.changes;
     console.log(this.squares)
-
-    this.squares.changes.subscribe( () => {
-
-      console.log("update");
-      //this.saySomething();
-      // this.howLongSpace = this.squares.last.position - this.squares.first.position;
-      // this.rd.setStyle(this.between.nativeElement, 'left', this.squares.first + 'px');
-      // this.rd.setStyle(this.between.nativeElement, 'width', this.howLongSpace + 'px');
-       }
-    )
+    
+    //this.betweenLength();
   
 
 
@@ -62,14 +71,47 @@ export class SliderComponent implements AfterViewInit{
     console.log("Hello");
   }
 
-  updatePos(number: number): void {
-    console.log(`On number: ${number}`);
+ 
 
+  updateBeginning(number: number): void {
+    console.log(`On beginning number: ${number}`);
+    this.squareBegin = number;
+    //this.betweenLength();
+
+  }
+
+  updateEnd(number: number): void {
+    console.log(`On end number: ${number}`);
+    this.squareEnd = number;
+    //this.betweenLength();
+
+  }
+
+  updateSquares(number: number[]) {
+    this.squareBegin = number[0];
+    this.squareEnd = number[1];
+    //console.log(`This is the update number: ${number}`);
+    console.log("Happy");
   }
 
   getUpdatedPositionsSquares() {
     console.log(this.squares)
   }
+
+
+  // @HostListener('document:click', ['$event'])
+
+  
+
+
+  
+
+
+
+
+
+
+  
 
   // whatToDo(event) {
   //   console.log("What is this");

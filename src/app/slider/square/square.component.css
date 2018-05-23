@@ -10,5 +10,6 @@
     height: 60px;
     position: absolute;
     cursor: move;
+    user-select: none;
 }
 

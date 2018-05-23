@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { SliderComponent } from './slider/slider.component';
 import { SquareComponent } from './slider/square/square.component';
 import { clickOutsideDirective } from './slider/square/clickoutside.directive';
+import { BetweenComponent } from './slider/between/between.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { clickOutsideDirective } from './slider/square/clickoutside.directive';
     AppComponent,
     SliderComponent,
     SquareComponent,
-    clickOutsideDirective
+    clickOutsideDirective,
+    BetweenComponent
   ],
   imports: [
     BrowserModule
