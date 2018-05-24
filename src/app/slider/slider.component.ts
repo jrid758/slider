@@ -34,18 +34,22 @@ export class SliderComponent implements OnInit, AfterViewInit {
   @Input() BeginningPos: number;
   @Input() EndingPos: number;
 
+  @Input() Length: number;
+
+
+
 
   
   constructor(private rd: Renderer2, private elemRef: ElementRef) {
-    this.squareEnd = this.EndingPos;
-    this.squareBegin = this.BeginningPos;
+    // this.squareEnd = this.EndingPos;
+    // this.squareBegin = this.BeginningPos;
     
 
   }
 
   ngOnInit(): void {
-    this.squareEnd = this.EndingPos;
-    this.squareBegin = this.BeginningPos;
+    // this.squareEnd = this.EndingPos;
+    // this.squareBegin = this.BeginningPos;
   }
   
 
@@ -75,23 +79,27 @@ export class SliderComponent implements OnInit, AfterViewInit {
 
   updateBeginning(number: number): void {
     console.log(`On beginning number: ${number}`);
-    this.squareBegin = number;
-    //this.betweenLength();
+    // this.squareBegin = number;
+
+    this.BeginningPos = number;
+  
 
   }
 
   updateEnd(number: number): void {
     console.log(`On end number: ${number}`);
-    this.squareEnd = number;
-    //this.betweenLength();
+    // this.squareEnd = number;
 
+    this.EndingPos = number;
   }
 
   updateSquares(number: number[]) {
-    this.squareBegin = number[0];
-    this.squareEnd = number[1];
-    //console.log(`This is the update number: ${number}`);
-    console.log("Happy");
+    // this.squareBegin = number[0];
+    // this.squareEnd = number[1];
+
+
+    this.BeginningPos = number[0];
+    this.EndingPos = number[1];  
   }
 
   getUpdatedPositionsSquares() {

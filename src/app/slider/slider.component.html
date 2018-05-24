@@ -1,14 +1,14 @@
 
      
       <div class="slider" #parentSlider >
-          <square  [position]="squareBegin"  (moved)="updateBeginning($event)" ></square>
-          <between [squareBegin2]="squareBegin" [squareEnd2]="squareEnd" (middleMoved)="updateSquares($event)"></between>
+          <square  [position]="BeginningPos"  (moved)="updateBeginning($event)" ></square>
+          <between [squareBegin2]="BeginningPos" [squareEnd2]="EndingPos" (middleMoved)="updateSquares($event)"></between>
           <!-- <div class="between" #between clickON>{{isDown}}</div> -->
-          <square  [position]="squareEnd"  (moved)="updateEnd($event)"></square>
+          <square  [position]="EndingPos"  (moved)="updateEnd($event)"></square>
         <!-- <div class="square" #someVar  (mouseover)="movement($event)" (mouseup)="up($event)" (mousedown)="down($event)"></div> -->
         <!-- <div class="square" #someVar2  (mouseover)="movement($event)" (mouseup)="up($event)" (mousedown)="down($event)"></div> -->
         <!-- <div class="square" #someVar2 (mousemove)="dragging($event)" (mouseover)="movement($event)" (mouseup)="up($event)" (mousedown)="down($event)"></div> -->
       </div>
 
       <!-- <button (click)="getUpdatedPositionsSquares()" style="user-select: none;">Square Locations</button> -->
-    
+     

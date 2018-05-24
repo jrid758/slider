@@ -4,10 +4,10 @@
 
 
 .between {
-    background-color: rgb(5, 255, 17);
-    height: 60px;
+    background-color: rgba(146, 0, 0, 0.959);
+    height: 100%;
     width: 300px;
     display: inline-block;
     position: absolute; 
-    left: 30px;
+    z-index: 10;
 }

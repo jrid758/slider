@@ -11,8 +11,7 @@ export class SquareComponent implements AfterViewInit{
   // @ContentChild('parentSlider') parent:ElementRef;
 
   @Input() set position(val) {
-    this.rd.setStyle(this.elemRef.nativeElement.lastElementChild, 'left', val + 'px');
-    console.log("fire");
+    this.rd.setStyle(this.elemRef.nativeElement.lastElementChild, 'left', (val-10) + 'px');
   } 
 
   @Output() moved: EventEmitter<number> = new EventEmitter<number>();
@@ -53,8 +52,13 @@ export class SquareComponent implements AfterViewInit{
                   // console.log(this.el);
                   // console.log("elemRef");
                   // console.log(this.elemRef);
-                  this.rd.setStyle(this.elemRef.nativeElement.lastElementChild, 'left', (x + this.offsetX) + 'px');
-                  this.moved.emit(this.elemRef.nativeElement.lastElementChild.offsetLeft);
+
+
+                  //this.rd.setStyle(this.elemRef.nativeElement.lastElementChild, 'left', ((x + this.offsetX)) + 'px');
+                  //this.moved.emit(this.elemRef.nativeElement.lastElementChild.offsetLeft);
+                  this.moved.emit(x + this.offsetX+10);
+
+
                   //this.rd.setStyle(this.elemRef.nativeElement.lastElementChild, 'left', this.posOffest + 'px');
                   break;
                 }
@@ -63,21 +67,21 @@ export class SquareComponent implements AfterViewInit{
 
             case "mouseup": {
               this.isDown = false;
-              this.rd.setStyle(this.elemRef.nativeElement.lastElementChild, 'background-color', 'orange');
+              // this.rd.setStyle(this.elemRef.nativeElement.lastElementChild, 'background-color', 'orange');
              
               break;
             }
 
             case "mousedown": {
               this.isDown = true;
-              this.offsetX = this.elemRef.nativeElement.lastElementChild.offsetLeft - x;
-              this.rd.setStyle(this.elemRef.nativeElement.lastElementChild, 'background-color', 'green');
+              this.offsetX = (this.elemRef.nativeElement.lastElementChild.offsetLeft - x);
+              // this.rd.setStyle(this.elemRef.nativeElement.lastElementChild, 'background-color', 'green');
               break;
             }
 
 
             case "mouseover": {
-              this.rd.setStyle(this.elemRef.nativeElement.lastElementChild, 'background-color', 'purple');
+              // this.rd.setStyle(this.elemRef.nativeElement.lastElementChild, 'background-color', 'purple');
               break;
             }
 

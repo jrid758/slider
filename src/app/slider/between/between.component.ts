@@ -65,9 +65,11 @@ export class BetweenComponent implements OnInit, AfterViewInit {
                   // this.EndingPos = this.EndingPos + (x + this.offsetX);
                   console.log("XXXXXXXX: " + x);
 
-                  this.squareBegin = (x + this.offsetX) - 30;
+                  // this.squareBegin = (x + this.offsetX) - 30;
+                  this.squareBegin = x + this.offsetX;
+
                   // this.squareBegin = (x + (this.offsetX + this.offsetSquareS));
-                  this.squareEnd = (x + this.offsetX) + (this.offsetSquareE - 30);
+                  this.squareEnd = (x + this.offsetX) + (this.offsetSquareE);
                   this.begEnd[0] = this.squareBegin;
                   this.begEnd[1] = this.squareEnd;
                   this.middleMoved.emit(this.begEnd);
@@ -79,7 +81,7 @@ export class BetweenComponent implements OnInit, AfterViewInit {
 
             case "mouseup": {
               this.isDown = false;
-              this.rd.setStyle(this.between.nativeElement, 'background-color', 'lime');
+              // this.rd.setStyle(this.between.nativeElement, 'background-color', 'lime');
              
               break;
             }
@@ -87,7 +89,7 @@ export class BetweenComponent implements OnInit, AfterViewInit {
             case "mousedown": {
               this.isDown = true;
               this.offsetX = this.between.nativeElement.offsetLeft - x;
-              this.rd.setStyle(this.between.nativeElement, 'background-color', 'green');
+              // this.rd.setStyle(this.between.nativeElement, 'background-color', 'green');
 
               
           
@@ -99,7 +101,7 @@ export class BetweenComponent implements OnInit, AfterViewInit {
 
 
             case "mouseover": {
-              this.rd.setStyle(this.between.nativeElement, 'background-color', 'purple');
+              // this.rd.setStyle(this.between.nativeElement, 'background-color', 'purple');
               break;
             }
 
@@ -117,7 +119,7 @@ export class BetweenComponent implements OnInit, AfterViewInit {
 
     console.log("Width of green: " + width);
     this.rd.setStyle(this.between.nativeElement, 'width', width +'px');
-    this.rd.setStyle(this.between.nativeElement, 'left', (this.squareBegin + 30) +'px');
+    this.rd.setStyle(this.between.nativeElement, 'left', (this.squareBegin) +'px');
   }
 
 }
