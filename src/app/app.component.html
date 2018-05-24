@@ -8,9 +8,15 @@
   <!-- <div class="slider" #parentSlider><div class="square" #someVar (mousemove)="dragging($event)" (mouseover)="movement($event)" (mouseup)="up($event)" (mousedown)="down($event)"></div></div> -->
   <hr>
 <div  class="timeline" >
-<div style="width:600px; height:20px;">
-  <slider [BeginningPos]='0' [EndingPos]='300' [Length]='5'></slider>
+<div style="width:600px; height:30px;">
+  <slider [BPos]='0' [EPos]='7' [Length]='10' (beggingEnding)="results($event)"></slider>
 </div>
+<div style="width:600px; height:30px;">
+    <slider [BPos]='0' [EPos]='4.5' [Length]='10' (beggingEnding)="results($event)"></slider>
+  </div>
+  <div style="width:600px; height:30px;">
+      <slider [BPos]='0' [EPos]='2' [Length]='10' (beggingEnding)="results($event)"></slider>
+    </div>
 <!-- <hr>
 <div style="width:500px; height:20px;">
   <slider [BeginningPos]='0' [EndingPos]='300'></slider>

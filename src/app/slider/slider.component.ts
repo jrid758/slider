@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ElementRef,Renderer2, ViewChild, HostListener, ViewChildren, QueryList, Input, Directive, OnInit } from '@angular/core';
+import { Component, AfterViewInit, ElementRef,Renderer2, ViewChild, HostListener, ViewChildren, QueryList, Input, Directive, OnInit, Output, EventEmitter } from '@angular/core';
 import { SquareComponent } from './square/square.component';
 // import { SquareComponent } from './square/square.component';
 
@@ -16,12 +16,13 @@ export class SliderComponent implements OnInit, AfterViewInit {
 
   
   @ViewChild('parentSlider') parentRef:ElementRef;
+  @ViewChild('square') squaresEl:ElementRef;
   
   // @ViewChildren('positionSquare') squares: QueryList<ElementRef>;
   @ViewChildren(SquareComponent) squares: QueryList<SquareComponent>;
 
 
-
+  begEnd: number[] = [0,0];
   offsetX: number;
   offsetSquareS: number;
   offsetSquareE: number;
@@ -31,10 +32,22 @@ export class SliderComponent implements OnInit, AfterViewInit {
   squareEnd: number;
   squareBegin: number;
 
-  @Input() BeginningPos: number;
-  @Input() EndingPos: number;
+  BeginningPos:number;
+  EndingPos:number;
+
+  realNumberLength:number;
+
 
   @Input() Length: number;
+  @Input() set BPos(val){this.BeginningPos = (val * 100)/this.Length; console.log("B: " + this.BeginningPos);};
+  @Input() set EPos(val){this.EndingPos = (val * 100)/this.Length; console.log("E: " + this.EndingPos);};
+
+
+ 
+  @Output() beggingEnding: EventEmitter<number[]> = new EventEmitter<number[]>();
+  
+
+  
 
 
 
@@ -54,10 +67,11 @@ export class SliderComponent implements OnInit, AfterViewInit {
   
 
   ngAfterViewInit() {
-  
-    // this.squares.changes;
-    console.log(this.squares)
     
+    // this.squares.changes;
+    console.log(this.squares);
+    console.log("What does squares do?: " + this.squares.first.el.nativeElement.clientWidth);
+    console.log(this.parentRef.nativeElement.clientWidth);
     //this.betweenLength();
   
 
@@ -72,25 +86,49 @@ export class SliderComponent implements OnInit, AfterViewInit {
   }
 
   private saySomething() {
-    console.log("Hello");
+    //console.log("Hello");
   }
 
+  emitPositions() {
+    this.begEnd[0] = this.BeginningPos * this.Length * .01;
+    this.begEnd[1] = this.EndingPos * this.Length * .01;
+    this.beggingEnding.emit(this.begEnd);
+    console.log("test: " + this.begEnd);
+  }
  
 
   updateBeginning(number: number): void {
-    console.log(`On beginning number: ${number}`);
+    //console.log(`On beginning number: ${number}`);
     // this.squareBegin = number;
-
-    this.BeginningPos = number;
-  
+    let testNumber = (number*100)/this.parentRef.nativeElement.clientWidth + (((this.squares.first.el.nativeElement.clientWidth*100)/this.parentRef.nativeElement.clientWidth)/2);
+    if(testNumber >= 0 && (this.EndingPos-1) > testNumber) {
+      this.BeginningPos = testNumber;
+      this.emitPositions();
+      console.log("cccccB" + this.EndingPos);
+      console.log("ccccc" + this.BeginningPos);
+    } else {
+      //this.BeginningPos = 0;
+      this.emitPositions();
+    }
 
   }
 
   updateEnd(number: number): void {
-    console.log(`On end number: ${number}`);
+    //console.log(`On end number: ${number}`);
     // this.squareEnd = number;
-
-    this.EndingPos = number;
+    //console.log(this.parentRef);
+    //console.log(`Width: ${this.parentRef.nativeElement.clientWidth}`);
+    let testNumber = ((number*100)/this.parentRef.nativeElement.clientWidth) + (((this.squares.first.el.nativeElement.clientWidth*100)/this.parentRef.nativeElement.clientWidth)/2);
+    console.log("Test Number End: " + testNumber);
+    if(testNumber <= 100 && testNumber > (this.BeginningPos+1)) {
+      this.EndingPos = testNumber;
+      //console.log(`Out Ending end number: ${this.EndingPos}`);
+      this.emitPositions();
+      console.log("bbbbb" + this.EndingPos);
+    } else {
+      //this.EndingPos = 100;
+      this.emitPositions();
+    }
   }
 
   updateSquares(number: number[]) {
@@ -98,8 +136,16 @@ export class SliderComponent implements OnInit, AfterViewInit {
     // this.squareEnd = number[1];
 
 
-    this.BeginningPos = number[0];
-    this.EndingPos = number[1];  
+    // this.BeginningPos = number[0];
+    // this.EndingPos = number[1];
+    
+    if(number[0] >= 0 && number[0] < number[1] && number[1] <= this.parentRef.nativeElement.clientWidth) {
+      this.BeginningPos = ((number[0]*100)/this.parentRef.nativeElement.clientWidth);
+      this.EndingPos = ((number[1]*100)/this.parentRef.nativeElement.clientWidth);
+      this.emitPositions(); 
+    } else {
+      this.emitPositions(); 
+    }
   }
 
   getUpdatedPositionsSquares() {

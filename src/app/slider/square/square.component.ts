@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, ElementRef,Renderer2, ViewChild, HostListener, ContentChild, Input, Output, EventEmitter } from '@angular/core';
 
 
+
 @Component({
   selector: 'square',
   templateUrl: './square.component.html',
@@ -8,10 +9,15 @@ import { Component, AfterViewInit, ElementRef,Renderer2, ViewChild, HostListener
 })
 export class SquareComponent implements AfterViewInit{
   @ViewChild('someVar') el:ElementRef;
+
   // @ContentChild('parentSlider') parent:ElementRef;
 
+  @Input() containerLength;
+
   @Input() set position(val) {
-    this.rd.setStyle(this.elemRef.nativeElement.lastElementChild, 'left', (val-10) + 'px');
+    //this.rd.setStyle(this.elemRef.nativeElement.lastElementChild, 'left', (val-10) + 'px');
+  
+    this.rd.setStyle(this.el.nativeElement, 'left', (val-(((100*this.el.nativeElement.clientWidth)/this.containerLength)/2)) + '%');
   } 
 
   @Output() moved: EventEmitter<number> = new EventEmitter<number>();
@@ -56,7 +62,8 @@ export class SquareComponent implements AfterViewInit{
 
                   //this.rd.setStyle(this.elemRef.nativeElement.lastElementChild, 'left', ((x + this.offsetX)) + 'px');
                   //this.moved.emit(this.elemRef.nativeElement.lastElementChild.offsetLeft);
-                  this.moved.emit(x + this.offsetX+10);
+                  // this.moved.emit(x + this.offsetX+10);
+                  this.moved.emit(x + this.offsetX);
 
 
                   //this.rd.setStyle(this.elemRef.nativeElement.lastElementChild, 'left', this.posOffest + 'px');
@@ -91,10 +98,10 @@ export class SquareComponent implements AfterViewInit{
             }
 
 
-            // default: {
-            //   this.isDown = false;
-            //   break;
-            // }
+            default: {
+              this.isDown = false;
+              break;
+            }
         }
 
   }
@@ -103,6 +110,7 @@ export class SquareComponent implements AfterViewInit{
   ngAfterViewInit() {
     console.log("ready");
     this.isDown = false;
+
     
     // console.log("di I get el:" + this.el.nativeElement);
     // console.log("Child is here: " + this.el.nativeElement.offsetLeft + " " + this.el.nativeElement.offsetTop);

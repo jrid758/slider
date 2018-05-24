@@ -14,10 +14,15 @@ export class AppComponent implements AfterViewInit {
   }
   start: number;
   end: number;
-
+  
 
   constructor() {
    
+  }
+  
+  results(val: number[]) {
+    // console.log(`---------------------------------Beginning ${val[0]} and ${val[1]}`);
+    console.log(`---------------------------------`);
   }
 
 }
