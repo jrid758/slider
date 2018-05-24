@@ -35,6 +35,7 @@ export class SquareComponent implements AfterViewInit{
   }
 
   // @HostListener('document:click', ['$event'])
+  // @HostListener('touchstart', ['$event'])
   @HostListener('mouseover', ['$event'])
   @HostListener('document:mouseout', ['$event'])
   @HostListener('mousedown', ['$event'])
@@ -49,6 +50,13 @@ export class SquareComponent implements AfterViewInit{
     //   console.log("true");
     // }
         switch(event.type) {
+          // case "touchstart": {
+          //   this.moved.emit(10);
+
+          //   break;
+          // }
+
+
             case "mousemove": {
                 if(this.isDown){
                   // this.posOffest = this.posOffest + 10;
