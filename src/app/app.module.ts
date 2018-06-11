@@ -7,6 +7,10 @@ import { SliderComponent } from './slider/slider.component';
 import { SquareComponent } from './slider/square/square.component';
 import { clickOutsideDirective } from './slider/square/clickoutside.directive';
 import { BetweenComponent } from './slider/between/between.component';
+import { CanvasComponent } from './canvas/canvas.component';
+import { TimelineComponent } from './timeline/timeline.component';
+import { MenuComponent } from './menu/menu.component';
+import { LayerComponent } from './timeline/layer/layer.component';
 
 
 @NgModule({
@@ -15,7 +19,11 @@ import { BetweenComponent } from './slider/between/between.component';
     SliderComponent,
     SquareComponent,
     clickOutsideDirective,
-    BetweenComponent
+    BetweenComponent,
+    CanvasComponent,
+    TimelineComponent,
+    MenuComponent,
+    LayerComponent
   ],
   imports: [
     BrowserModule

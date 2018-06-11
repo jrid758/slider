@@ -32,8 +32,8 @@ export class SliderComponent implements OnInit, AfterViewInit {
   squareEnd: number;
   squareBegin: number;
 
-  BeginningPos:number;
-  EndingPos:number;
+  BeginningPos:number = 0;
+  EndingPos:number= 0;
 
   realNumberLength:number;
 
