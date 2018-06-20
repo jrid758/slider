@@ -13,8 +13,7 @@ export class CanvasComponent implements OnInit, AfterViewInit {
   
   
   canvas: any;
-  rectangle: any;
-  text: any;
+  rectangle: any; // used in example
   width: number = 180;
   height: number = 60;
   playFile: any;
@@ -40,57 +39,24 @@ export class CanvasComponent implements OnInit, AfterViewInit {
 
 
   ngAfterViewInit(): void {
-    //this.printValue();
-    //this.startCanvas();
     this.canvasDraw();
   }
 
-
-  functionCall() {
-    console.log(JSON.stringify(this.canvas));
-  }
   
  
 
-  printValue() {
-    console.log("fabric.version");
-    console.log(this.fabric.version);
-  }
-
-  loadFileToCanvas(file:any) {
-    file.forEach(element => {
-      if(element.type === "TEXT") {
-        //******************//
-        //this.text = new fabric.Textbox(element.copy, { left: element.left, top: element.top, fontSize: 20, fontFamily: "Gotham", originX: 'center', originY: 'center' });
-        this.text = this.fabric.Textbox(element.copy, element.left, element.top, element.id);
-        this.text.name = element.name;
-        this.text.type = element.type;
-        this.canvas.add(this.text);
-        // this.text.on('object:modified', function(options) {
-        //   console.log(options.e.clientX, options.e.clientY, options);
-        // });
-
-        this.canvas.renderAll();
-      }
-    });
-    
-  }
-
+  //doesn't update main file
   move(){
-  this.text.animate('left', '+=5', {
+    let moveObj = this.canvas.getActiveObject();
+    moveObj.animate('left', '+=5', {
     duration: 1000,
     onChange: this.canvas.renderAll.bind(this.canvas),
     onComplete: function() {
-      // animateBtn.disabled = false;
-      //******************//
-      //fabric.util.requestAnimFrame(this.move.bind(this));
-      this.fabric.requestAnimFrame(this.move.bind(this));
+      //this.fabric.requestAnimFrame(this.move.bind(this));
     }//,
     //easing: fabric.util.ease.easeIn
-  });
-  //fabric.util.requestAnimFrame(this.move.bind(this));
-  
-}
+    });
+  }
 
   fireMove() {
     //fabric.util.requestAnimFrame(this.move.bind(this));
@@ -107,7 +73,7 @@ export class CanvasComponent implements OnInit, AfterViewInit {
       let currentAngle = activeObj.get('angle');
       currentAngle++;
       activeObj.set('angle', currentAngle);
-      console.log("running" + " " + activeObj.get('angle') + activeObj);
+      //console.log("running" + " " + activeObj.get('angle') + activeObj);
       this.canvas.renderAll();
       //******************//
       //fabric.util.requestAnimFrame(this.animateStuff.bind(this));
@@ -234,100 +200,8 @@ export class CanvasComponent implements OnInit, AfterViewInit {
   }
 
 
-  startCanvas() {
-
-
-    //******************//
-    this.canvas = this.fabric.Canvas(this.canvasMain.nativeElement, this.width, this.height);
-
-
-    // this.text.on('object:modified', function(options) {
-    //       console.log(options.e.clientX, options.e.clientY);
-    //     });
-
-    this.canvas.on('text:changed', function(options) {
-      //console.log(options.target.text,options);
-      this.update.emit(
-       {
-            type: options.target.type,
-            name: options.target.name,
-            copy: options.target.text,
-            left: options.target.left,
-            top: options.target.top,
-            id: options.target.id
-        }
-
-
-      );
-      console.log(options.target.width);
-    }.bind(this));
-
-
-
-    this.canvas.on('object:modified', function(options) {
-      //console.log(options.target.text,options);
-      this.update.emit(
-       {
-            type: options.target.type,
-            name: options.target.name,
-            copy: options.target.text,
-            left: options.target.left,
-            top: options.target.top,
-            id: options.target.id
-        }
-
-
-      );
-    }.bind(this));
-
-    
-
-    this.loadFileToCanvas(this.playFile);
-
-
-
-
-    
-
-
-    // this.rectangle = new fabric.Rect({
-    //     left: 100,
-    //     top: 100,
-    //     width: 50,
-    //     height: 50,
-    //     fill: 'red'
-    //   });
-
-    
-
-    //this.rectangle.set({ left: 100, top: 50, angle: 45 });
-    
-
-    // this.canvas.add(new fabric.Rect({
-    //   left: 100,
-    //   top: 100,
-    //   width: 50,
-    //   height: 50,
-    //   fill: '#faa'
-    // }));
-
-    // this.canvas.add(new fabric.Circle({
-    //   left: 200,
-    //   top: 100,
-    //   radius: 25,
-    //   fill: '#afa'
-    // }));
-
-    // this.canvas.add(new fabric.Triangle({
-    //   left: 300,
-    //   top: 100,
-    //   width: 50,
-    //   height: 50,
-    //   fill: '#aaf'
-    // }));
-
+ 
   
-  }
 
   results(val: number[]) {
     // console.log(`---------------------------------Beginning ${val[0]} and ${val[1]}`);

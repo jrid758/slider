@@ -1,17 +1,15 @@
 
 <div style="user-select: none;">
     <h1>
-      -------
       <app-canvas [playFileLoad]="playFile" (update)="playFileUpdate($event)"></app-canvas>
-    </h1>
-    
-  </div>
+    </h1>    
+</div>
   
   
-  <hr>
+<hr>
 
-  <app-timeline></app-timeline>
-  <app-menu (newText)="playFileUpdate($event)" ></app-menu>
+<app-timeline></app-timeline>
+<app-menu (newText)="playFileUpdate($event)" ></app-menu>
 
 
 

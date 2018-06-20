@@ -34,8 +34,8 @@ export class AppComponent implements AfterViewInit {
               id: "234822347",
               type: "TEXT",
               copy: "text3V",
-              left: 20,
-              top: 20,
+              left: 0,
+              top: 0,
               effects: [
                 {
                   type: "moveIn",
@@ -54,7 +54,7 @@ export class AppComponent implements AfterViewInit {
               type: "TEXT",
               copy: "text4V",
               left: 20,
-              top: 20,
+              top: 50,
               effects: [
                 {
                   type: "moveIn",
@@ -72,8 +72,8 @@ export class AppComponent implements AfterViewInit {
               id: "89065567878656",
               type: "TEXT",
               copy: "text2V",
-              left: 20,
-              top: 20,
+              left: 90,
+              top: 50,
               effects: [
                 {
                   type: "moveIn",

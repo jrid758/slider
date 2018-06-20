@@ -8,8 +8,7 @@ import { Component, OnInit, AfterViewInit, ViewChild, ViewContainerRef } from '@
 export class TimelineComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
-    this.start = 0;
-    this.end = 75;
+    
   }
   start: number;
   end: number;
@@ -18,6 +17,8 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   constructor() { }
 
   ngOnInit() {
+    this.start = 5;
+    this.end = 75;
   }
 
   placeholder(val) {
