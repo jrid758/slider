@@ -11,6 +11,7 @@ import { CanvasComponent } from './canvas/canvas.component';
 import { TimelineComponent } from './timeline/timeline.component';
 import { MenuComponent } from './menu/menu.component';
 import { LayerComponent } from './timeline/layer/layer.component';
+import { FabricService } from './common/fabric.service';
 
 
 @NgModule({
@@ -29,7 +30,7 @@ import { LayerComponent } from './timeline/layer/layer.component';
     BrowserModule
    
   ],
-  providers: [],
+  providers: [FabricService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
