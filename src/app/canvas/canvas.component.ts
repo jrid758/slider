@@ -87,7 +87,7 @@ export class CanvasComponent implements OnInit, AfterViewInit {
     //Does canvas exist?
     if(!this.canvas) {
         this.canvas = this.fabric.Canvas(this.canvasMain.nativeElement, this.width, this.height);
-
+        console.log("CANVAS GENERATED.............................")
         this.canvas.on('text:changed', function(options) {
           console.log("UPDATE HAPPENING TEXT: " + options.target.text,options);
           //console.log(options.target.text,options);
@@ -99,7 +99,8 @@ export class CanvasComponent implements OnInit, AfterViewInit {
             top: options.target.top,
             id: options.target.id,
             zdepth: options.target.zdepth,
-            effects: options.target.effects
+            effects: options.target.effects,
+            color: options.target.color,
             }
           );
           console.log(options.target.width);
@@ -117,7 +118,8 @@ export class CanvasComponent implements OnInit, AfterViewInit {
                 top: options.target.top,
                 id: options.target.id,
                 zdepth: options.target.zdepth,
-                effects: options.target.effects
+                effects: options.target.effects,
+                color: options.target.color
             }
     
     
@@ -129,6 +131,8 @@ export class CanvasComponent implements OnInit, AfterViewInit {
 
     //Create New Object, Update
     let canvasObjects = this.canvas.getObjects();
+    console.log("Whats in ObjectsX");
+    console.log(canvasObjects); 
 
     this.playFile.comps[this.playFile.currentComp].comp.forEach(fileObj => {
       //Look thru all canvas objects to see if file obj already exists
@@ -173,13 +177,48 @@ export class CanvasComponent implements OnInit, AfterViewInit {
       this.canvas.remove(objectToDelete);
     }
   });
+
+
+
+
+
+
+
+  //change order based on zdepth
+  //this.zdepthOrderUpdate();
+  this.zdepthOrderUpdateTest();
+  //this.canvas.preserveObjectStacking =  true;
+  // console.log("backup objects type");
+  // console.log(typeof(backupObjects));
+  // console.log("whats in it");
+  // console.log(backupObjects);
+  // console.log("Object Depth");
+  // console.log(backupObjects[0].zdepth);
+  // console.log(Object.keys(backupObjects).length);
+  // for (let i =0; i < 3 ;i++) {
+  //   console.log("RUNNING");
+  //   canvasObjects[backupObjects.zdepth] = backupObjects[i];
+  //   console.log(canvasObjects[backupObjects.zdepth]);
+  // }
+  // console.log("backup objects finished");
+  // console.log(canvasObjects);
+
+
+
+
+  // Object.keys(backupObjects).forEach((obj,i) => {
+  //   canvasObjects[obj.] = 
+  // });
+  // for(var canvasObj in backupObjects) {
+  //   canvasObjects[canvasObj.zdepth] = canvasObj;
+  // });
   
   }
 
   createObj(obj) {
     if(obj.type === "TEXT") {
           console.log("Create Object Ran: " + obj.copy);
-          let text = this.fabric.Textbox(obj.copy, obj.left, obj.top, obj.id);
+          let text = this.fabric.Textbox(obj.copy, obj.left, obj.top, obj.id, obj.color,obj.zdepth);
           this.canvas.add(text);
           this.canvas.renderAll();
         }
@@ -194,7 +233,61 @@ export class CanvasComponent implements OnInit, AfterViewInit {
       objToModify.id = objFile.id;
       objToModify.effects = objFile.effects;
       objToModify.zdepth = objFile.zdepth;
+      objToModify.set('color, objFile.color');
     }
+
+
+  }
+
+  zdepthOrderUpdate() {
+    console.log("Before Hand" , this.canvas.getObjects());
+
+
+    let objectsOnCanvas = this.canvas.getObjects().length;
+    for (let i = 0; i < objectsOnCanvas ;i++) {
+      console.log("***************" + i);
+      console.log(this.canvas.getObjects());
+  
+        for (let k = 0; k < (objectsOnCanvas-1) ;k++) {
+          console.log("Whats first",this.canvas.item(k).zdepth,this.canvas.item(k+1).zdepth);
+    
+          if(this.canvas.item(k).zdepth > this.canvas.item(k+1).zdepth) {
+            this.canvas.bringForward(this.canvas.item(k));
+            console.log("forwards");
+          }
+        }
+  
+    }
+  
+    console.log("After Object********",this.canvas.getObjects());
+
+
+
+  }
+
+
+  zdepthOrderUpdateTest() {
+    console.log("Before Hand" , this.canvas.getObjects());
+
+
+    let objectsOnCanvas = this.canvas.getObjects();
+    for (let i = 0; i < objectsOnCanvas.length ;i++) {
+      console.log("***************" + i);
+      console.log(objectsOnCanvas);
+  
+        for (let k = 0; k < (objectsOnCanvas.length-1) ;k++) {
+          console.log("Whats first",objectsOnCanvas[k].zdepth,objectsOnCanvas[k+1].zdepth);
+    
+          if(objectsOnCanvas[k].zdepth > objectsOnCanvas[k+1].zdepth) {
+            this.canvas.bringForward(objectsOnCanvas[k]);
+            console.log("forwards");
+          }
+        }
+  
+    }
+  
+    console.log("After Object********",this.canvas.getObjects());
+
 
 
   }
@@ -220,5 +313,32 @@ export class CanvasComponent implements OnInit, AfterViewInit {
     this.canvas.renderAll();
 
   }
+
+  // bringForward(object) {
+  //   var objects = this.getObjects(),
+  //       idx = objects.indexOf(object),
+  //       nextIntersectingIdx = idx;
+
+
+  //   // if object is not on top of stack (last item in an array)
+  //   if (idx !== objects.length-1) {
+
+  //     // traverse up the stack looking for the nearest intersecting object
+  //     for (var i = idx + 1, l = this._objects.length; i < l; ++i) {
+
+  //       var isIntersecting = object.intersectsWithObject(objects[i]) ||
+  //                            object.isContainedWithinObject(this._objects[i]) ||
+  //                            this._objects[i].isContainedWithinObject(object);
+
+  //       if (isIntersecting) {
+  //         nextIntersectingIdx = i;
+  //         break;
+  //       }
+  //     }
+  //     removeFromArray(objects, object);
+  //     objects.splice(nextIntersectingIdx, 0, object);
+  //   }
+  //   this.renderAll();
+  // }
 
 }

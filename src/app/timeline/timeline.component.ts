@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ViewContainerRef, Input } from '@angular/core';
 
 @Component({
   selector: 'app-timeline',
@@ -12,7 +12,15 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   }
   start: number;
   end: number;
+  playFile: any;
   @ViewChild('target', {read: ViewContainerRef}) target;
+
+  @Input()
+  set playFileLoad(val: any){
+    console.log("FILE CHANGED");
+    this.playFile = val;
+    //this.canvasDraw();
+  }
 
   constructor() { }
 
@@ -25,8 +33,6 @@ export class TimelineComponent implements OnInit, AfterViewInit {
 
   }
 
-  add() {
 
-  }
 
 }

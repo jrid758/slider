@@ -8,8 +8,8 @@
   
 <hr>
 
-<app-timeline></app-timeline>
-<app-menu (newText)="playFileUpdate($event)" ></app-menu>
+<app-timeline [playFileLoad]="playFile" ></app-timeline>
+<app-menu (newText)="playFileUpdate($event)"  (deleteTextFunc)="deleteFileObject($event)"></app-menu>
 
 
 

@@ -8,8 +8,8 @@ export class FabricService {
 
   constructor() { }
 
-  Textbox(elementCopy, elementLeft, elementTop, id): any {
-    let obj = new fabric.Textbox(elementCopy, { left: elementLeft, top: elementTop, fontSize: 20, fontFamily: "Gotham", originX: 'center', originY: 'center', id: id, type: 'TEXT' });
+  Textbox(elementCopy, elementLeft, elementTop, id, color, zdepth): any {
+    let obj = new fabric.IText(elementCopy, { left: elementLeft, top: elementTop, fill: color, fontSize: 20, fontFamily: "Gotham", originX: 'center', originY: 'center', id: id, type: 'TEXT', zdepth: zdepth });
     return obj;
   }
 
@@ -24,7 +24,7 @@ export class FabricService {
 
 
   Canvas(element, width, height):any {
-    let obj = new fabric.Canvas(element, { width: width, height: height });
+    let obj = new fabric.Canvas(element, { width: width, height: height, preserveObjectStacking: true, selection: false});
     return obj;
   }
 }
