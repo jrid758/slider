@@ -17,6 +17,7 @@ export class CanvasComponent implements OnInit, AfterViewInit {
   width: number = 180;
   height: number = 60;
   playFile: any;
+  currentlySelectedObject: any;
 
 
   @ViewChild('can') canvasMain:ElementRef;
@@ -100,11 +101,15 @@ export class CanvasComponent implements OnInit, AfterViewInit {
             id: options.target.id,
             zdepth: options.target.zdepth,
             effects: options.target.effects,
-            color: options.target.color,
+            color: options.target.color
             }
           );
           console.log(options.target.width);
         }.bind(this));
+
+
+
+      
     
     
     
@@ -126,7 +131,141 @@ export class CanvasComponent implements OnInit, AfterViewInit {
           );
         }.bind(this));
 
+ 
+
+        //X//
+
+        this.canvas.on('mouse:down', function(options) {
+          console.log("CLICKING!!!!", options);
+          console.log("Last Selected Object: ",this.currentlySelectedObject);
+          console.log("NEW Selected Object: ",this.canvas.getActiveObject());
+          // let left;
+          // let top;
+          // let pointerPos;
+
+          // if(!this.canvas.getActiveObject()) {
+          //   this.currentlySelectedObject = this.canvas.getActiveObject();
+          // }
+
+
+
+          // if(!this.currentlySelectedObject) {
+          //   this.currentlySelectedObject = this.canvas.getActiveObject();
+          //   console.log("object selected");
+          // }
+
+
+
+         
+
+
+
+            if(this.currentlySelectedObject) {
+
+                  
+                  let cusorOnCurrent = false;
+                  let cusorOnNew = false;
+                  let compareNewObj = this.canvas.getActiveObject();
+                  let left = this.currentlySelectedObject.left;
+                  let top = this.currentlySelectedObject.top;
+                  let pointerPos = this.canvas.getPointer(options.e);
+                  
+                  console.log("P",pointerPos.x, pointerPos.y);
+                  console.log("PMATH",pointerPos.x - left, pointerPos.y - top);
+                  
+
+        
+                  if(this.currentlySelectedObject) {
+                      if(
+                        (this.currentlySelectedObject.aCoords.bl.x <= pointerPos.x) &&
+                        (pointerPos.x <= this.currentlySelectedObject.aCoords.br.x) &&
+                        (this.currentlySelectedObject.aCoords.bl.y >= pointerPos.y) &&
+                        (pointerPos.y >= this.currentlySelectedObject.aCoords.tl.y)
+                      ) {
+                        cusorOnCurrent = true;
+                        console.log("---------------Cusor On Current");
+                      }
+                }
+
+                if(compareNewObj) {
+                      if(
+                        (compareNewObj.aCoords.bl.x <= pointerPos.x) &&
+                        (pointerPos.x <= compareNewObj.aCoords.br.x) &&
+                        (compareNewObj.aCoords.bl.y >= pointerPos.y) &&
+                        (pointerPos.y >= compareNewObj.aCoords.tl.y)
+                      ) {
+                        cusorOnNew = true;
+                        console.log("-------------------Cusor On New");
+                      }
+                }
+
+                if(cusorOnCurrent && cusorOnNew) {
+                  console.log("!!!!!!!FIXING SELECTION!!!!!!!!!!!");
+           
+                  
+                  this.canvas.setActiveObject(this.currentlySelectedObject);
+            
+                  options.target = this.currentlySelectedObject;
+                  options.transform.target = this.currentlySelectedObject;
+                  options.transform.offsetX = pointerPos.x - this.currentlySelectedObject.left;
+                  options.transform.offsetY = pointerPos.y - this.currentlySelectedObject.top;
+                  console.log("Whats clicked CHANGED", options.target);
+   
+                  console.log("ACTIVE3",this.canvas.getActiveObject());
+                } 
+        }
+
+
+
+
+
+          
+
+
+            
+            // console.log("Current:",this.currentlySelectedObject);
+            
+            // this.currentlySelectedObject = this.canvas.getActiveObject();
+
+            // //let pointerPos = this.canvas.getPointer(options.e);
+            // console.log("Cursor Position: ", pointerPos.x);
+
+
+            // console.log("Points:",this.currentlySelectedObject.aCoords.bl.x,this.currentlySelectedObject.aCoords.bl.y);
+            // console.log("Active:", this.canvas.getActiveObject());
+            
+       
+
+          this.currentlySelectedObject = this.canvas.getActiveObject();
+
+          // if(this.canvas.getActiveObject() === this.currentlySelectedObject) {
+          //   console.log("Same object");
+          //   this.currentlySelectedObject = this.canvas.getActiveObject();
+          // }
+
+          // if(this.canvas.getActiveObject() !== this.currentlySelectedObject) {
+          //   console.log(options.e.x);
+          //   this.currentlySelectedObject = this.canvas.getActiveObject();
+          // }
+
+
+
+          // if(this.canvas.getActiveObject()){
+          //   console.log("active");
+          //   console.log(this.canvas.getActiveObject());
+          //   this.currentlySelectedObject = this.canvas.getActiveObject();
+          // }else{
+          //   console.log("not active");
+          // }
+          
+        }.bind(this));
+
+
+
+         //X//
     }
+
+   
 
 
     //Create New Object, Update
