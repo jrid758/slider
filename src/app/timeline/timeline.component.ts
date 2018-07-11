@@ -69,6 +69,12 @@ export class TimelineComponent implements OnInit, AfterViewInit {
 
   }
 
+  select(event) {
+    console.log("CLICCCCCKED", event.target);
+    //this.playFiles.currentSelectedObj = 
+    this.update.emit(this.playFiles);
+  }
+
 
 
 }

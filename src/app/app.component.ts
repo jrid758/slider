@@ -26,6 +26,7 @@ export class AppComponent implements AfterViewInit {
       compHeight: 60,
       compWidth: 180,
       currentComp: 0,
+      currentSelectedObj: "234822347",
       comps: [
         {
           background: "red",
@@ -178,6 +179,9 @@ playFileUpdate(update){
   console.log(this.playFile);
 }
 
+select() {
+  console.log("CLICCCCCKED");
+}
   
 
 }

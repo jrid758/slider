@@ -133,36 +133,12 @@ export class CanvasComponent implements OnInit, AfterViewInit {
 
  
 
-        //X//
-
         this.canvas.on('mouse:down', function(options) {
           console.log("CLICKING!!!!", options);
           console.log("Last Selected Object: ",this.currentlySelectedObject);
           console.log("NEW Selected Object: ",this.canvas.getActiveObject());
           // let left;
-          // let top;
-          // let pointerPos;
-
-          // if(!this.canvas.getActiveObject()) {
-          //   this.currentlySelectedObject = this.canvas.getActiveObject();
-          // }
-
-
-
-          // if(!this.currentlySelectedObject) {
-          //   this.currentlySelectedObject = this.canvas.getActiveObject();
-          //   console.log("object selected");
-          // }
-
-
-
-         
-
-
-
             if(this.currentlySelectedObject) {
-
-                  
                   let cusorOnCurrent = false;
                   let cusorOnNew = false;
                   let compareNewObj = this.canvas.getActiveObject();
@@ -210,60 +186,18 @@ export class CanvasComponent implements OnInit, AfterViewInit {
                   options.transform.offsetX = pointerPos.x - this.currentlySelectedObject.left;
                   options.transform.offsetY = pointerPos.y - this.currentlySelectedObject.top;
                   console.log("Whats clicked CHANGED", options.target);
-   
                   console.log("ACTIVE3",this.canvas.getActiveObject());
                 } 
         }
-
-
-
-
-
-          
-
-
-            
-            // console.log("Current:",this.currentlySelectedObject);
-            
-            // this.currentlySelectedObject = this.canvas.getActiveObject();
-
-            // //let pointerPos = this.canvas.getPointer(options.e);
-            // console.log("Cursor Position: ", pointerPos.x);
-
-
-            // console.log("Points:",this.currentlySelectedObject.aCoords.bl.x,this.currentlySelectedObject.aCoords.bl.y);
-            // console.log("Active:", this.canvas.getActiveObject());
-            
-       
-
           this.currentlySelectedObject = this.canvas.getActiveObject();
-
-          // if(this.canvas.getActiveObject() === this.currentlySelectedObject) {
-          //   console.log("Same object");
-          //   this.currentlySelectedObject = this.canvas.getActiveObject();
-          // }
-
-          // if(this.canvas.getActiveObject() !== this.currentlySelectedObject) {
-          //   console.log(options.e.x);
-          //   this.currentlySelectedObject = this.canvas.getActiveObject();
-          // }
-
-
-
-          // if(this.canvas.getActiveObject()){
-          //   console.log("active");
-          //   console.log(this.canvas.getActiveObject());
-          //   this.currentlySelectedObject = this.canvas.getActiveObject();
-          // }else{
-          //   console.log("not active");
-          // }
-          
         }.bind(this));
-
-
-
-         //X//
     }
+
+    //set currently selected//
+    this.playlistSetCurrentActive();
+
+    //this.canvas.setActiveObject(this.canvas.item(0));
+    // console.log("CANVAS ITEM SELECTED ID",this.canvas.items);
 
    
 
@@ -453,31 +387,15 @@ export class CanvasComponent implements OnInit, AfterViewInit {
 
   }
 
-  // bringForward(object) {
-  //   var objects = this.getObjects(),
-  //       idx = objects.indexOf(object),
-  //       nextIntersectingIdx = idx;
+  playlistSetCurrentActive() {
+    let cObjects = this.canvas.getObjects();
+    cObjects.forEach(canvasObj => {
+      if(canvasObj.id === this.playFile.currentSelectedObj) {
+        this.canvas.setActiveObject(canvasObj);
+      }
+    });
+  }
 
 
-  //   // if object is not on top of stack (last item in an array)
-  //   if (idx !== objects.length-1) {
-
-  //     // traverse up the stack looking for the nearest intersecting object
-  //     for (var i = idx + 1, l = this._objects.length; i < l; ++i) {
-
-  //       var isIntersecting = object.intersectsWithObject(objects[i]) ||
-  //                            object.isContainedWithinObject(this._objects[i]) ||
-  //                            this._objects[i].isContainedWithinObject(object);
-
-  //       if (isIntersecting) {
-  //         nextIntersectingIdx = i;
-  //         break;
-  //       }
-  //     }
-  //     removeFromArray(objects, object);
-  //     objects.splice(nextIntersectingIdx, 0, object);
-  //   }
-  //   this.renderAll();
-  // }
 
 }
