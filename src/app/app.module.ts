@@ -12,6 +12,7 @@ import { TimelineComponent } from './timeline/timeline.component';
 import { MenuComponent } from './menu/menu.component';
 import { LayerComponent } from './timeline/layer/layer.component';
 import { FabricService } from './common/fabric.service';
+import { DragulaModule } from '../../node_modules/ng2-dragula';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { FabricService } from './common/fabric.service';
     LayerComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    DragulaModule
    
   ],
   providers: [FabricService],

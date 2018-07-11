@@ -1,6 +1,13 @@
 <div  class="timeline" #target>
-  <app-layer></app-layer>
-  <app-layer></app-layer>
+ 
+  <!-- <app-layer *ngFor="let practiceStuff of practiceStuffs">{{practiceStuff}}</app-layer> -->
+  <!-- <app-layer *ngFor="let practiceStuff of practiceStuffs[0].comp">{{practiceStuff.number}}</app-layer> -->
+  <!-- <app-layer *ngFor="let practiceStuff of playFiles.comps[0].comp">{{practiceStuff.number}}</app-layer> -->
+  <div [dragula]='"bag-one"' [dragulaModel]=' playFiles.comps[0].comp' >
+      <div *ngFor="let playFile of playFiles.comps[0].comp">
+       <app-layer [layerID]="playFile.id" #layerID></app-layer>
+    </div>
+ </div>
 
   <!-- <div style="width:600px; height:30px;">
     <slider [BPos]='start' [EPos]='end' [Length]='200' (beggingEnding)="placeholder($event)"></slider>

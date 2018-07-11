@@ -1,3 +1,24 @@
-<p>
-  ----------------------
-</p>
+
+
+<!-- <div id={{layerName}} class="layer" [style.width]="widthlayer"  (click)="selected()" [ngStyle]="{'outline': variableOutline ? '3px solid greenyellow' : '0px solid greenyellow'}">
+    <div class="layername">
+      {{layerName}}   
+      <span class='toggle' (click)="animateMe()" [@rotateArrow]='stateArrow' [style.visibility]="isEffectEmpty() ? 'visible' : 'hidden'"></span>
+    </div>
+    <div class="layernamespace" [style.width]="widthlayernamespace"><button class="deleteButton" (click)="removeLayer()">X</button><button (click)="addEffect()">ADD EFFECT</button></div>
+    <div [@myAnim]='state'>
+      <div *ngIf='effects != null'> 
+        <effect *ngFor='let effectProps of effects' [effect]='effectProps' [layerName]='layerName'></effect>
+      </div> 
+   </div>
+</div> -->
+
+<div  class="layer" [style.width]="widthlayer" id={{layerID}}>
+    <div class="layername">Layer_{{layerID}}</div>
+    <!-- <div class="layernamespace" [style.width]="widthlayernamespace"><button class="deleteButton" (click)="removeLayer()">X</button><button (click)="addEffect()">ADD EFFECT</button></div>
+    <div [@myAnim]='state'>
+      <div *ngIf='effects != null'> 
+        <effect *ngFor='let effectProps of effects' [effect]='effectProps' [layerName]='layerName'></effect>
+      </div> 
+   </div> -->
+</div>

@@ -24,10 +24,12 @@ export class MenuComponent implements OnInit, AfterViewInit {
   }
 
   addText(): any{
+    let UUID = this.generateUUID()
+    let copy = UUID.slice(0,4).toString();
     let obj = {
-      id: this.generateUUID(),
+      id: UUID,
       type: "TEXT",
-      copy: "TEXT",
+      copy: copy,
       left: 30,
       top: 30,
       zdepth: 10,

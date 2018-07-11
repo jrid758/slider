@@ -33,7 +33,7 @@ export class AppComponent implements AfterViewInit {
             {
               id: "234822347",
               type: "TEXT",
-              copy: "Depth7",
+              copy: "2348",
               left: 0,
               top: 0,
               zdepth: 7,
@@ -54,7 +54,7 @@ export class AppComponent implements AfterViewInit {
             {
               id: "890787656",
               type: "TEXT",
-              copy: "Depth2",
+              copy: "8907",
               left: 20,
               top: 50,
               zdepth: 2,
@@ -73,9 +73,9 @@ export class AppComponent implements AfterViewInit {
               ]
             },
             {
-              id: "89065567878656",
+              id: "59065567878656",
               type: "TEXT",
-              copy: "Depth5",
+              copy: "5906",
               left: 90,
               top: 50,
               zdepth: 5,
@@ -132,6 +132,13 @@ deleteFileObject(id){
       this.playFile = Object.assign({}, this.playFile);
     }
   });
+}
+
+playFileAllUpdate(update) {
+  let updatePlayFile = update;
+    this.playFile = Object.assign({}, updatePlayFile);
+
+
 }
 
 playFileUpdate(update){
