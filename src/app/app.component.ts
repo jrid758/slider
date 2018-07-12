@@ -22,13 +22,13 @@ export class AppComponent implements AfterViewInit {
   constructor() {
 
     this.playFile = {
-      videoLength: 6,
       compHeight: 60,
       compWidth: 180,
       currentComp: 0,
-      currentSelectedObj: "234822347",
+      currentSelectedObj: "",
       comps: [
-        {
+        { 
+          videoLength: 6,
           background: "red",
           comp: [
             {
@@ -97,6 +97,7 @@ export class AppComponent implements AfterViewInit {
           ]
         },
         {
+          videoLength: 6,
           background: "red",
           comp: [
             {

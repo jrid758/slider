@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, trigger, state, style, transition, animate, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, trigger, state, style, transition, animate, Output, EventEmitter, AfterContentInit } from '@angular/core';
 
 @Component({
   selector: 'app-layer',
@@ -34,11 +34,14 @@ import { Component, OnInit, Input, trigger, state, style, transition, animate, O
 
   ]
 })
-export class LayerComponent implements OnInit {
+export class LayerComponent implements OnInit, AfterContentInit {
+  ngAfterContentInit(): void {
+  
+  }
 
   state: string = 'small';
   stateArrow: string = 'right';
-  variableOutline: boolean = false;
+  variableOutline = false;
   playFile;
 
   widthlayer: string;
@@ -55,6 +58,7 @@ export class LayerComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
   }
 
   animateMe() {

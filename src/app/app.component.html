@@ -4,12 +4,12 @@
       <app-canvas [playFileLoad]="playFile" (update)="playFileUpdate($event)" (updateAll)="playFileAllUpdate($event)"></app-canvas>
     </h1>    
 </div>
-  
-  
+<hr>
+<app-menu (newText)="playFileUpdate($event)"></app-menu>
 <hr>
 
 <app-timeline [playFileLoad]="playFile" (update)="playFileAllUpdate($event)" (updateAll)="playFileAllUpdate($event)" ></app-timeline>
-<app-menu (newText)="playFileUpdate($event)"  (deleteTextFunc)="deleteFileObject($event)"></app-menu>
+
 
 
 

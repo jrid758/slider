@@ -11,7 +11,6 @@ export class MenuComponent implements OnInit, AfterViewInit {
 
 
   @Output() newText: EventEmitter<any> = new EventEmitter<any>();
-  @Output() deleteTextFunc: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }
 
@@ -39,9 +38,7 @@ export class MenuComponent implements OnInit, AfterViewInit {
     this.newText.emit(obj);
 }
 
-deleteText(): any {
-  this.deleteTextFunc.emit('890787656');
-}
+
 
 
 

@@ -80,18 +80,18 @@ export class TimelineComponent implements OnInit, AfterViewInit {
       //console.log("changed queryLayer",this.layerIDs);
     })
 
-     //to highlight layer
-     if(this.layerIDs) {
-      this.layerIDs.forEach(element => {
-        //console.log("layerID", element.layerID, this.playFiles.currentSelectedObj);
-        if(element.layerID !== this.playFiles.currentSelectedObj) {
-          element.variableOutline = false;
-        } else {
-          element.variableOutline = true;
-          //console.log("MATCH", element.layerID);
-        }
-      });
-    }
+    //  //to highlight layer
+    //  if(this.layerIDs) {
+    //   this.layerIDs.forEach(element => {
+    //     //console.log("layerID", element.layerID, this.playFiles.currentSelectedObj);
+    //     if(element.layerID !== this.playFiles.currentSelectedObj) {
+    //       element.variableOutline = false;
+    //     } else {
+    //       element.variableOutline = true;
+    //       //console.log("MATCH", element.layerID);
+    //     }
+    //   });
+    // }
   }
 
  
@@ -106,7 +106,9 @@ export class TimelineComponent implements OnInit, AfterViewInit {
     console.log(this.playFiles);
     this.updateAll.emit(this.playFiles);
     //selectLayer
+    console.log("GREEN OUT LINE TRUE");
     layer.variableOutline = true;
+    console.log("GREEN OUT LINE FALSE");
     //unselectAllOtherViewChildren
     this.layerIDs.forEach(element => {
       if(element.layerID !== layer.layerID) {
@@ -117,6 +119,7 @@ export class TimelineComponent implements OnInit, AfterViewInit {
 
   playFileAllUpdate(event) {
     this.updateAll.emit(event);
+
   }
 
 
