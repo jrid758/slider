@@ -115,6 +115,10 @@ export class TimelineComponent implements OnInit, AfterViewInit {
     });
   }
 
+  playFileAllUpdate(event) {
+    this.updateAll.emit(event);
+  }
+
 
 
 }

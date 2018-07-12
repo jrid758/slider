@@ -137,6 +137,7 @@ deleteFileObject(id){
 
 playFileAllUpdate(update) {
   let updatePlayFile = update;
+  console.log("ALLupdate", updatePlayFile);
     this.playFile = Object.assign({}, updatePlayFile);
 
 

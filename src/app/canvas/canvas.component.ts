@@ -260,6 +260,8 @@ export class CanvasComponent implements OnInit, AfterViewInit {
     canvasObjects.forEach(canvasObj => {
       let found: boolean = false;
       let objectToDelete:any;
+      console.log("%$%", canvasObj);
+      objectToDelete = canvasObj; //Fixed last object not deleting
       this.playFile.comps[this.playFile.currentComp].comp.forEach(fileObj => {
         if(canvasObj.id === fileObj.id) {
           
@@ -272,7 +274,7 @@ export class CanvasComponent implements OnInit, AfterViewInit {
       
     });
 
-    console.log("FOUND: " + found);
+    console.log("FOUND: " + found, objectToDelete);
     if(!found) {
       //console.log("XFound canvas: " + canvasObj.id + " File " + fileObj.id + " found " + found);
       this.canvas.remove(objectToDelete);
@@ -416,16 +418,19 @@ export class CanvasComponent implements OnInit, AfterViewInit {
   }
 
   playlistSetCurrentActive() {
-    console.log("RUNNING CURRENTLY SELECTED", this.playFile.currentSelectedObj);
     let cObjects = this.canvas.getObjects();
-    cObjects.forEach(canvasObj => {
-      if(canvasObj.id === this.playFile.currentSelectedObj) {
-        this.currentlySelectedObject = canvasObj;
-        this.canvas.setActiveObject(canvasObj);
-        console.log(" SET RUNNING CURRENTLY SELECTED", canvasObj.id);
-        this.canvas.renderAll();
-      }
-    });
+   
+      console.log("RUNNING CURRENTLY SELECTED", this.playFile.currentSelectedObj);
+      
+      cObjects.forEach(canvasObj => {
+        if(canvasObj.id === this.playFile.currentSelectedObj) {
+          this.currentlySelectedObject = canvasObj;
+          this.canvas.setActiveObject(canvasObj);
+          console.log(" SET RUNNING CURRENTLY SELECTED", canvasObj.id);
+          this.canvas.renderAll();
+        }
+      });
+   
   }
 
 
