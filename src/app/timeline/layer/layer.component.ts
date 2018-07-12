@@ -7,6 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class LayerComponent implements OnInit {
 
+  variableOutline: boolean = false;
+
   @Input() layerID: number;
   constructor() { }
 

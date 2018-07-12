@@ -24,12 +24,14 @@ export class CanvasComponent implements OnInit, AfterViewInit {
 
   @Input()
   set playFileLoad(val: any){
-    console.log("FILE CHANGED");
+    
     this.playFile = val;
+    console.log("FILE CHANGED", this.playFile.currentSelectedObj);
     this.canvasDraw();
   }
 
   @Output() update: EventEmitter<any> = new EventEmitter<any>();
+  @Output() updateAll: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private fabric: FabricService) { }
 
@@ -150,7 +152,7 @@ export class CanvasComponent implements OnInit, AfterViewInit {
                   console.log("PMATH",pointerPos.x - left, pointerPos.y - top);
                   
 
-        
+                  //Is cursor on current
                   if(this.currentlySelectedObject) {
                       if(
                         (this.currentlySelectedObject.aCoords.bl.x <= pointerPos.x) &&
@@ -163,6 +165,7 @@ export class CanvasComponent implements OnInit, AfterViewInit {
                       }
                 }
 
+                //Is cursor on new
                 if(compareNewObj) {
                       if(
                         (compareNewObj.aCoords.bl.x <= pointerPos.x) &&
@@ -172,9 +175,13 @@ export class CanvasComponent implements OnInit, AfterViewInit {
                       ) {
                         cusorOnNew = true;
                         console.log("-------------------Cusor On New");
+
+                        //this.currentlySelectedObject = this.canvas.getActiveObject();
+                      //this.playlistSetCurrentActive();
                       }
                 }
-
+                
+                //I think keep current selection
                 if(cusorOnCurrent && cusorOnNew) {
                   console.log("!!!!!!!FIXING SELECTION!!!!!!!!!!!");
            
@@ -187,9 +194,29 @@ export class CanvasComponent implements OnInit, AfterViewInit {
                   options.transform.offsetY = pointerPos.y - this.currentlySelectedObject.top;
                   console.log("Whats clicked CHANGED", options.target);
                   console.log("ACTIVE3",this.canvas.getActiveObject());
-                } 
+                }
+                
+                //Update selection becasue new is selected
+                if(!cusorOnCurrent && cusorOnNew) {
+                  console.log("NEWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW", this.playFile.currentSelectedObj, compareNewObj.id);
+                  this.playFile.currentSelectedObj = compareNewObj.id;
+                  this.updateAll.emit(this.playFile);
+                  
+                  
+                }
+              
+                
         }
           this.currentlySelectedObject = this.canvas.getActiveObject();
+          //Catch all for selections when nothing is select. Updates playlist for timeline.
+          if(this.currentlySelectedObject === null) {
+            this.playFile.currentSelectedObj = null;
+            this.updateAll.emit(this.playFile);
+          } else {
+            this.playFile.currentSelectedObj = this.currentlySelectedObject.id;
+            this.updateAll.emit(this.playFile);
+          }
+          console.log("Bcurrent", this.currentlySelectedObject);
           
         }.bind(this));
     }

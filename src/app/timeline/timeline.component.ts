@@ -20,12 +20,25 @@ export class TimelineComponent implements OnInit, AfterViewInit {
 
   @Input()
   set playFileLoad(val: any){
-    console.log("FILE CHANGED");
+    console.log("FILE CHANGED", this.layerIDs);
     this.playFiles = val;
     //higher zdepth on top
     this.playFiles.comps[0].comp.sort((a,b) => {
       return b.zdepth - a.zdepth;
     })
+
+    //to highlight layer
+    if(this.layerIDs) {
+      this.layerIDs.forEach(element => {
+        console.log("layerID", element.layerID, this.playFiles.currentSelectedObj);
+        if(element.layerID !== this.playFiles.currentSelectedObj) {
+          element.variableOutline = false;
+        } else {
+          element.variableOutline = true;
+          console.log("MATCH", element.layerID);
+        }
+      });
+    }
   }
 
   constructor(private dragulaService: DragulaService) {
@@ -66,6 +79,19 @@ export class TimelineComponent implements OnInit, AfterViewInit {
       this.processChildren();
       //console.log("changed queryLayer",this.layerIDs);
     })
+
+     //to highlight layer
+     if(this.layerIDs) {
+      this.layerIDs.forEach(element => {
+        //console.log("layerID", element.layerID, this.playFiles.currentSelectedObj);
+        if(element.layerID !== this.playFiles.currentSelectedObj) {
+          element.variableOutline = false;
+        } else {
+          element.variableOutline = true;
+          //console.log("MATCH", element.layerID);
+        }
+      });
+    }
   }
 
  
@@ -74,11 +100,19 @@ export class TimelineComponent implements OnInit, AfterViewInit {
 
   }
 
-  select(id) {
-    console.log("CLICCCCCKED", id);
-    this.playFiles.currentSelectedObj = id.layerID;
+  select(layer) {
+    console.log("CLICCCCCKED", layer);
+    this.playFiles.currentSelectedObj = layer.layerID;
     console.log(this.playFiles);
     this.updateAll.emit(this.playFiles);
+    //selectLayer
+    layer.variableOutline = true;
+    //unselectAllOtherViewChildren
+    this.layerIDs.forEach(element => {
+      if(element.layerID !== layer.layerID) {
+        element.variableOutline = false;
+      }
+    });
   }
 
 

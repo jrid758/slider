@@ -179,9 +179,7 @@ playFileUpdate(update){
   console.log(this.playFile);
 }
 
-select() {
-  console.log("CLICCCCCKED");
-}
+
   
 
 }

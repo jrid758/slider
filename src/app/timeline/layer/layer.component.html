@@ -13,7 +13,7 @@
    </div>
 </div> -->
 
-<div  class="layer" [style.width]="widthlayer" id={{layerID}}>
+<div  class="layer" [style.width]="widthlayer" id={{layerID}} [ngStyle]="{'outline': variableOutline ? '3px solid greenyellow' : '0px solid greenyellow'}">
     <div class="layername">Layer_{{layerID}}</div>
     <!-- <div class="layernamespace" [style.width]="widthlayernamespace"><button class="deleteButton" (click)="removeLayer()">X</button><button (click)="addEffect()">ADD EFFECT</button></div>
     <div [@myAnim]='state'>
