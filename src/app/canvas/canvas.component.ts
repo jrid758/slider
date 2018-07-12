@@ -180,7 +180,7 @@ export class CanvasComponent implements OnInit, AfterViewInit {
            
                   
                   this.canvas.setActiveObject(this.currentlySelectedObject);
-            
+                  //this.playlistSetCurrentActive();
                   options.target = this.currentlySelectedObject;
                   options.transform.target = this.currentlySelectedObject;
                   options.transform.offsetX = pointerPos.x - this.currentlySelectedObject.left;
@@ -190,6 +190,7 @@ export class CanvasComponent implements OnInit, AfterViewInit {
                 } 
         }
           this.currentlySelectedObject = this.canvas.getActiveObject();
+          
         }.bind(this));
     }
 
@@ -392,6 +393,7 @@ export class CanvasComponent implements OnInit, AfterViewInit {
     let cObjects = this.canvas.getObjects();
     cObjects.forEach(canvasObj => {
       if(canvasObj.id === this.playFile.currentSelectedObj) {
+        this.currentlySelectedObject = canvasObj;
         this.canvas.setActiveObject(canvasObj);
         console.log(" SET RUNNING CURRENTLY SELECTED", canvasObj.id);
         this.canvas.renderAll();
