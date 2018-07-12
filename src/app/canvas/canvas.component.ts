@@ -388,10 +388,13 @@ export class CanvasComponent implements OnInit, AfterViewInit {
   }
 
   playlistSetCurrentActive() {
+    console.log("RUNNING CURRENTLY SELECTED", this.playFile.currentSelectedObj);
     let cObjects = this.canvas.getObjects();
     cObjects.forEach(canvasObj => {
       if(canvasObj.id === this.playFile.currentSelectedObj) {
         this.canvas.setActiveObject(canvasObj);
+        console.log(" SET RUNNING CURRENTLY SELECTED", canvasObj.id);
+        this.canvas.renderAll();
       }
     });
   }

@@ -16,6 +16,7 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   @ViewChildren('layerID') layerIDs;
 
   @Output() update: EventEmitter<any> = new EventEmitter<any>();
+  @Output() updateAll: EventEmitter<any> = new EventEmitter<any>();
 
   @Input()
   set playFileLoad(val: any){
@@ -30,16 +31,20 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   constructor(private dragulaService: DragulaService) {
 
     dragulaService.drop.subscribe((value) => {
-      this.onDrop();
+      console.log("WHATS IN VALUE: ", value[1].id);
+      this.onDrop(value[1].id);
     });
+
+  
   }
 
-  onDrop() {
+  onDrop(id) {
     let length = this.playFiles.comps[0].comp.length;
     this.playFiles.comps[0].comp.forEach((element,index) => {
       element.zdepth = length - index;
       console.log("numberIndex",index, element.zdepth, length);
     });
+    this.playFiles.currentSelectedObj = id;
     this.update.emit(this.playFiles);
     console.log("ArrayThing", this.playFiles);
    
@@ -69,10 +74,11 @@ export class TimelineComponent implements OnInit, AfterViewInit {
 
   }
 
-  select(event) {
-    console.log("CLICCCCCKED", event.target);
-    //this.playFiles.currentSelectedObj = 
-    this.update.emit(this.playFiles);
+  select(id) {
+    console.log("CLICCCCCKED", id);
+    this.playFiles.currentSelectedObj = id.layerID;
+    console.log(this.playFiles);
+    this.updateAll.emit(this.playFiles);
   }
 
 
