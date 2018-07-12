@@ -48,6 +48,9 @@ export class TimelineComponent implements OnInit, AfterViewInit {
       this.onDrop(value[1].id);
     });
 
+    dragulaService.setOptions('bag-one', {
+      moves: (el, source, handle, sibling) => !el.classList.contains('no-drag')
+    });
   
   }
 

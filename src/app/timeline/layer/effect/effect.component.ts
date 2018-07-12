@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 
 @Component({
   selector: 'effect',
@@ -8,6 +8,14 @@ import { Component, OnInit } from '@angular/core';
 export class EffectComponent implements OnInit {
 
   effectLength: string;
+
+  @HostListener('mouseenter') mouseover() {
+    console.log("IN");
+  };
+
+  @HostListener('mouseleave') mouseleave() {
+    console.log("OUT");
+  };
 
   constructor() { }
 
