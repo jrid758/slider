@@ -1,0 +1,18 @@
+<!-- <p>
+  effect works!
+</p> -->
+<div class="effect" >
+    <!-- <div class="effectName">{{effect.type}}<button class="deleteButton" (click)="removeEffect()">X</button>
+      <select class='moveinsel' *ngIf='effect.direction !== ""' (change)="updateSelect(selected.value)" [(ngModel)]="directionSelected" #selected>
+          <option *ngFor="let option of optionSelect" [ngValue]="option">{{option}}</option>
+      </select>
+    </div> -->
+  
+  <div class="effectnamespace" [style.width]="effectLength"><button></button></div>
+  <div class="effectsliderspace" [style.width]="effectLength">
+      <div style="width:600px; height:30px;">
+          <slider [BPos]='0' [EPos]='50' [Length]='200' (beggingEnding)="placeholder($event)"></slider>
+        </div> 
+    <!-- <nouislider [connect]="true" [min]="min" [max]="max" [(ngModel)]="someRange"  (ngModelChange)="sliderNum($event)"></nouislider> -->
+  </div>
+</div>

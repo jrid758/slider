@@ -18,9 +18,11 @@
         <span class='toggle' (click)="animateMe()" [@rotateArrow]='stateArrow' [style.visibility]="isEffectEmpty() ? 'visible' : 'hidden'"></span>
     </div>
     <div class="layernamespace" [style.width]="widthlayernamespace"><button class="deleteButton" (click)="removeLayer()">X</button><button (click)="addEffect()">ADD EFFECT</button></div>
-    <!-- <div [@myAnim]='state'>
-      <div *ngIf='effects != null'> 
-        <effect *ngFor='let effectProps of effects' [effect]='effectProps' [layerName]='layerName'></effect>
-      </div> 
-   </div>  -->
+    <div [@myAnim]='state'>
+      <!-- <div *ngIf='this.playFile.comps[this.playFile.currentComp].comps.comp.effects !== []'>  -->
+          <!-- <effect *ngFor='let effectProps of this.playFile.comps[this.playFile.currentComp].comp.effects' [effect]='effectProps' [layerName]='layerName'></effect> -->
+        <!-- <effect *ngFor='let effectProps of this.playFile.comps[this.playFile.currentComp].comps.comp.effects'></effect> -->
+        <effect></effect>
+      <!-- </div>  -->
+   </div> 
 </div>

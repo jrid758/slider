@@ -1,0 +1,62 @@
+.effect {
+    clear: both;
+    height: 100%;
+    
+    font-size: 80%;
+    
+  
+}
+
+.effectName {
+    box-sizing: border-box;
+    float: left;
+    background-color: yellow;
+    height: 30px;
+    width: 100%;
+    width: 100px;
+    font-size:10px;
+    /* border: solid .5px; */
+}
+
+
+.effectnamespace {
+    width: 500px;
+    height: 15px;
+    float: right;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0.2) 10px,
+        rgba(0, 0, 0, 0.3) 10px,
+        rgba(0, 0, 0, 0.3) 20px
+        );
+  
+}
+
+.effectsliderspace {
+    width: 500px;
+    height: 15px;
+    background-color: #007DFF;
+    float: right;
+    /* margin: 0 30px 0 30px; */
+    /* margin: 0 30px 0 30px; */
+    overflow: hidden;
+ 
+}
+
+.deleteButton {
+    float: right;
+    background-color: red;
+    color: white;
+    
+}
+
+.moveinsel {
+
+
+}
+
+select {
+    height: 18px;
+    transform: scale(.8);
+}

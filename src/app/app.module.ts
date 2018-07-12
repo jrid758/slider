@@ -14,6 +14,7 @@ import { LayerComponent } from './timeline/layer/layer.component';
 import { FabricService } from './common/fabric.service';
 import { DragulaModule } from '../../node_modules/ng2-dragula';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EffectComponent } from './timeline/layer/effect/effect.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CanvasComponent,
     TimelineComponent,
     MenuComponent,
-    LayerComponent
+    LayerComponent,
+    EffectComponent
     
   ],
   imports: [
