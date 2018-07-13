@@ -383,6 +383,7 @@ export class CanvasComponent implements OnInit, AfterViewInit {
     
           if(objectsOnCanvas[k].zdepth > objectsOnCanvas[k+1].zdepth) {
             this.canvas.bringForward(objectsOnCanvas[k]);
+            this.canvas.renderAll();
             console.log("forwards");
           }
         }
@@ -390,7 +391,7 @@ export class CanvasComponent implements OnInit, AfterViewInit {
     }
   
     console.log("After Object********",this.canvas.getObjects());
-
+    
 
 
   }

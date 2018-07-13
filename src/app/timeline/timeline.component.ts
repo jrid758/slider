@@ -24,9 +24,19 @@ export class TimelineComponent implements OnInit, AfterViewInit {
     console.log("FILE CHANGED", this.layerIDs);
     this.playFiles = val;
     //higher zdepth on top
-    this.playFiles.comps[0].comp.sort((a,b) => {
-      return b.zdepth - a.zdepth;
-    })
+   
+      this.playFiles.comps[0].comp.sort((a,b) => {
+        console.log(b.copy,b.zdepth,a.copy,a.zdepth)
+        return a.zdepth - b.zdepth;
+      });
+
+      this.playFiles.comps[0].comp.reverse();
+
+
+
+      console.log("FILE CHANGED sort", this.playFiles.comps[0].comp);
+     
+    
 
     //to highlight layer
     if(this.layerIDs) {
@@ -44,6 +54,11 @@ export class TimelineComponent implements OnInit, AfterViewInit {
 
   constructor(private dragulaService: DragulaService, private renderer: Renderer2) {
 
+    // dragulaService.setOptions('first-bag', {})
+    // dragulaService.dropModel.subscribe((value) => {
+    //   //this.onDropModel(value);
+    // });
+
     dragulaService.drop.subscribe((value) => {
       console.log("WHATS IN VALUE: ", value[1].id);
       this.onDrop(value[1].id);
@@ -57,10 +72,17 @@ export class TimelineComponent implements OnInit, AfterViewInit {
 
   onDrop(id) {
     let length = this.playFiles.comps[0].comp.length;
-    this.playFiles.comps[0].comp.forEach((element,index) => {
-      element.zdepth = length - index;
-      console.log("numberIndex",index, element.zdepth, length);
-    });
+    console.log("Before z change: ",length, this.playFiles.comps[0].comp);
+    for(let i =0;i < length ;i++) {
+      console.log("i", i,this.playFiles.comps[0].comp[i].copy);
+      this.playFiles.comps[0].comp[i].zdepth = i;
+    }
+    // this.playFiles.comps[0].comp.forEach((element,index) => {
+    //   // element.zdepth = length - index;
+    //   element.zdepth = index;
+    //   console.log("numberIndex",index, element.zdepth, element.copy, length);
+    // });
+    console.log("ID:", id);
     this.playFiles.currentSelectedObj = id;
     this.update.emit(this.playFiles);
     console.log("ArrayThing", this.playFiles);

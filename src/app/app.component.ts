@@ -37,7 +37,7 @@ export class AppComponent implements AfterViewInit {
               copy: "2348",
               left: 0,
               top: 0,
-              zdepth: 7,
+              zdepth: 2,
               color: "red",
               effects: [
                 {
@@ -58,7 +58,7 @@ export class AppComponent implements AfterViewInit {
               copy: "8907",
               left: 20,
               top: 50,
-              zdepth: 2,
+              zdepth: 1,
               color: "green",
               effects: [
                 {
@@ -79,7 +79,7 @@ export class AppComponent implements AfterViewInit {
               copy: "5906",
               left: 90,
               top: 50,
-              zdepth: 5,
+              zdepth: 0,
               color: "blue",
               effects: [
                 {
