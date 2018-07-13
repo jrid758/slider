@@ -12,6 +12,7 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   start: number;
   end: number;
   playFiles: any;
+  updateZdepthOrder: boolean = false;
   @ViewChild('target', {read: ViewContainerRef}) target;
   @ViewChildren('layerID') layerIDs;
   @ViewChildren('hold', { read: ElementRef }) hold:QueryList<ElementRef>;
@@ -23,14 +24,23 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   set playFileLoad(val: any){
     console.log("FILE CHANGED", this.layerIDs);
     this.playFiles = val;
-    //higher zdepth on top
+    // const drake = this.dragulaService.find('bag-one').drake;
+    // const models = drake.models;
+    if(this.updateZdepthOrder) {
+      this.onDrop(56);
+        //higher zdepth on top
    
-      this.playFiles.comps[0].comp.sort((a,b) => {
-        console.log(b.copy,b.zdepth,a.copy,a.zdepth)
-        return a.zdepth - b.zdepth;
-      });
+        this.playFiles.comps[0].comp.sort((a,b) => {
+          console.log(b.copy,b.zdepth,a.copy,a.zdepth)
+          return b.zdepth - a.zdepth;
+        });
 
-      this.playFiles.comps[0].comp.reverse();
+      this.updateZdepthOrder = false;
+    } 
+    
+  
+
+      // this.playFiles.comps[0].comp.reverse();
 
 
 
@@ -54,14 +64,17 @@ export class TimelineComponent implements OnInit, AfterViewInit {
 
   constructor(private dragulaService: DragulaService, private renderer: Renderer2) {
 
-    // dragulaService.setOptions('first-bag', {})
+    
     // dragulaService.dropModel.subscribe((value) => {
-    //   //this.onDropModel(value);
+    //   this.onDropModel(value);
     // });
 
     dragulaService.drop.subscribe((value) => {
       console.log("WHATS IN VALUE: ", value[1].id);
-      this.onDrop(value[1].id);
+      this.playFiles.currentSelectedObj = value[1].id;
+      this.updateZdepthOrder = true;
+      this.update.emit(this.playFiles);
+      //this.onDrop(value[1].id);
     });
 
     dragulaService.setOptions('bag-one', {
@@ -70,12 +83,17 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   
   }
 
+  // onDropModel(value){
+  //   console.log("Drop Model",value[1].id);
+  //   this.onDrop(value[1].id);
+  // }
+
   onDrop(id) {
     let length = this.playFiles.comps[0].comp.length;
     console.log("Before z change: ",length, this.playFiles.comps[0].comp);
     for(let i =0;i < length ;i++) {
       console.log("i", i,this.playFiles.comps[0].comp[i].copy);
-      this.playFiles.comps[0].comp[i].zdepth = i;
+      this.playFiles.comps[0].comp[i].zdepth = length-i;
     }
     // this.playFiles.comps[0].comp.forEach((element,index) => {
     //   // element.zdepth = length - index;
@@ -83,8 +101,10 @@ export class TimelineComponent implements OnInit, AfterViewInit {
     //   console.log("numberIndex",index, element.zdepth, element.copy, length);
     // });
     console.log("ID:", id);
-    this.playFiles.currentSelectedObj = id;
+    //this.playFiles.currentSelectedObj = id;
+   
     this.update.emit(this.playFiles);
+   
     console.log("ArrayThing", this.playFiles);
    
   }
@@ -105,6 +125,16 @@ export class TimelineComponent implements OnInit, AfterViewInit {
       this.processChildren();
       //console.log("changed queryLayer",this.layerIDs);
     })
+
+
+
+     
+    //higher zdepth on top
+   
+    this.playFiles.comps[0].comp.sort((a,b) => {
+      console.log(b.copy,b.zdepth,a.copy,a.zdepth)
+      return b.zdepth - a.zdepth;
+    });
 
     //  //to highlight layer
     //  if(this.layerIDs) {
