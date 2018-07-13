@@ -4,8 +4,8 @@
   <!-- <app-layer *ngFor="let practiceStuff of practiceStuffs[0].comp">{{practiceStuff.number}}</app-layer> -->
   <!-- <app-layer *ngFor="let practiceStuff of playFiles.comps[0].comp">{{practiceStuff.number}}</app-layer> -->
   <div [dragula]='"bag-one"' [dragulaModel]=' playFiles.comps[0].comp' >
-      <div *ngFor="let playFile of playFiles.comps[0].comp" [id]="playFile.id" >
-       <app-layer  [layerID]="playFile.id" [playFileLoad]="playFiles" (updateAll)="playFileAllUpdate($event)" #layerID (click)="select(layerID)" ></app-layer>
+      <div *ngFor="let playFile of playFiles.comps[0].comp" [id]="playFile.id" #hold>
+       <app-layer   [layerID]="playFile.id" [playFileLoad]="playFiles" (updateAll)="playFileAllUpdate($event)" #layerID (click)="select(layerID)" (hold)="holdLayer($event)"></app-layer>
     </div>
  </div>
 

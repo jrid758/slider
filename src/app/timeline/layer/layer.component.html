@@ -22,7 +22,9 @@
       <!-- <div *ngIf='this.playFile.comps[this.playFile.currentComp].comps.comp.effects !== []'>  -->
           <!-- <effect *ngFor='let effectProps of this.playFile.comps[this.playFile.currentComp].comp.effects' [effect]='effectProps' [layerName]='layerName'></effect> -->
         <!-- <effect *ngFor='let effectProps of this.playFile.comps[this.playFile.currentComp].comps.comp.effects'></effect> -->
-        <effect></effect>
+        <effect (hold)="stopMoving($event)"></effect>
       <!-- </div>  -->
    </div> 
 </div>
+
+

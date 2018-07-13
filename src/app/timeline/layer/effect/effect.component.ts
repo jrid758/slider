@@ -1,4 +1,5 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChildren, ContentChildren, Output, EventEmitter } from '@angular/core';
+import { LayerComponent } from '../layer.component';
 
 @Component({
   selector: 'effect',
@@ -8,13 +9,16 @@ import { Component, OnInit, HostListener } from '@angular/core';
 export class EffectComponent implements OnInit {
 
   effectLength: string;
-
+  @ContentChildren(LayerComponent) targets;
+  @Output() hold: EventEmitter<any> = new EventEmitter<any>();
   @HostListener('mouseenter') mouseover() {
-    console.log("IN");
+    console.log("IN",this.targets);
+    this.hold.emit(true);
   };
 
   @HostListener('mouseleave') mouseleave() {
     console.log("OUT");
+    this.hold.emit(false);
   };
 
   constructor() { }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, trigger, state, style, transition, animate, Output, EventEmitter, AfterContentInit } from '@angular/core';
+import { Component, OnInit, Input, trigger, state, style, transition, animate, Output, EventEmitter, AfterContentInit, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-layer',
@@ -54,6 +54,15 @@ export class LayerComponent implements OnInit, AfterContentInit {
   }
 
   @Output() updateAll: EventEmitter<any> = new EventEmitter<any>();
+  @Output() hold: EventEmitter<any> = new EventEmitter<any>();
+
+  // @HostListener('mouseenter') mouseover() {
+  //   console.log("IN");
+  // };
+
+  // @HostListener('mouseleave') mouseleave() {
+  //   console.log("OUT");
+  // };
 
   constructor() { }
 
@@ -75,6 +84,10 @@ export class LayerComponent implements OnInit, AfterContentInit {
     //console.log("Is it empty: " + _.isEmpty(this.effects));
     return true;
     //return  !_.isEmpty(this.effects);
+  }
+
+  stopMoving(event) {
+    this.hold.emit(event);
   }
 
   removeLayer() {

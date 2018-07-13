@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ViewContainerRef, Input, ViewChildren, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ViewContainerRef, Input, ViewChildren, Output, EventEmitter, ElementRef, Renderer2, QueryList } from '@angular/core';
 import { DragulaService } from '../../../node_modules/ng2-dragula';
 
 @Component({
@@ -14,6 +14,7 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   playFiles: any;
   @ViewChild('target', {read: ViewContainerRef}) target;
   @ViewChildren('layerID') layerIDs;
+  @ViewChildren('hold', { read: ElementRef }) hold:QueryList<ElementRef>;
 
   @Output() update: EventEmitter<any> = new EventEmitter<any>();
   @Output() updateAll: EventEmitter<any> = new EventEmitter<any>();
@@ -41,7 +42,7 @@ export class TimelineComponent implements OnInit, AfterViewInit {
     }
   }
 
-  constructor(private dragulaService: DragulaService) {
+  constructor(private dragulaService: DragulaService, private renderer: Renderer2) {
 
     dragulaService.drop.subscribe((value) => {
       console.log("WHATS IN VALUE: ", value[1].id);
@@ -123,6 +124,19 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   playFileAllUpdate(event) {
     this.updateAll.emit(event);
 
+  }
+
+  holdLayer(event) {
+    this.hold.forEach(element => {
+      if(event) {
+        console.log("Class added",element.nativeElement);
+        this.renderer.addClass(element.nativeElement,'no-drag');
+      } else {
+        console.log("Class removed");
+        this.renderer.removeClass(element.nativeElement,'no-drag');
+      }
+    });
+   
   }
 
 
