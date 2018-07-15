@@ -106,7 +106,51 @@ export class LayerComponent implements OnInit, AfterContentInit {
     // this._objectservice.removeLayerObject(this.layerName);
 }
 
-addEffect() {
+// addText(): any{
+//   let UUID = this.generateUUID()
+//   let copy = UUID.slice(0,4).toString();
+//   let obj = {
+//     id: UUID,
+//     type: "TEXT",
+//     copy: copy,
+//     left: 30,
+//     top: 30,
+//     zdepth: 10,
+//     color: "purple",
+//     effects: []
+//   }
+//   this.newText.emit(obj);
+// }
+
+addEffect(effectObj) {
+  let letEffectToAdd = "moveIn";
+  console.log("addEFFECT")
+  this.playFile.comps[0].comp.forEach(element => {
+    if(element.id === this.layerID) {
+      let effectFound = false;
+      element.effects.forEach(effectsElement => {
+         if(effectsElement.type === letEffectToAdd) {
+           effectFound = true;
+         } 
+      });
+      if(!effectFound) {
+        element.effects.push({
+          type: "moveIn",
+          start: .1,
+          end: 3
+        
+       });
+        this.updateAll.emit(this.playFile);
+      }
+
+    }
+  });
+
+
+}
+
+
+// addEffect() {
   // let newObject = this._objectservice.getObjectByLayerName(this.layerName);
   // let newEffect: IEffect = {
 
@@ -137,7 +181,7 @@ addEffect() {
   // this.animateMe();
   // }
   // this._objectservice.addEffectToLayer(this.layerName, newEffect);
-}
+// }
 
   
 

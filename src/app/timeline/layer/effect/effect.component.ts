@@ -11,6 +11,7 @@ export class EffectComponent implements OnInit {
   effectLength: string;
   @ContentChildren(LayerComponent) targets;
   @Output() hold: EventEmitter<any> = new EventEmitter<any>();
+  @Output() effectUpdate: EventEmitter<any> = new EventEmitter<any>();
   @HostListener('mouseenter') mouseover() {
     console.log("IN",this.targets);
     this.hold.emit(true);
@@ -29,5 +30,16 @@ export class EffectComponent implements OnInit {
   placeholder($event) {
     
   }
+
+  // addEffect() {
+  //     let obj = {
+        
+  //         type: "moveIn",
+  //         start: .1,
+  //         end: 3
+        
+  //   }
+  //   this.effectUpdate.emit(obj);
+  // }
 
 }

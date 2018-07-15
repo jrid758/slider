@@ -41,11 +41,6 @@ export class AppComponent implements AfterViewInit {
               color: "red",
               effects: [
                 {
-                  type: "moveIn",
-                  start: .1,
-                  end: 3
-                },
-                {
                   type: "zoomOut",
                   start: 4,
                   end: 5
