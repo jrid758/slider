@@ -48,9 +48,11 @@ export class LayerComponent implements OnInit, AfterContentInit {
   widthlayernamespace: string;
 
   @Input() layerID: number;
+  @Input() layerNumber: any;
   @Input()
   set playFileLoad(val: any){
     this.playFile = val;
+    console.log("Layer Input: ", this.playFile);
   }
 
   @Output() updateAll: EventEmitter<any> = new EventEmitter<any>();
@@ -134,11 +136,11 @@ addEffect(effectObj) {
          } 
       });
       if(!effectFound) {
+        //effects structure
         element.effects.push({
           type: "moveIn",
           start: .1,
           end: 3
-        
        });
         this.updateAll.emit(this.playFile);
       }

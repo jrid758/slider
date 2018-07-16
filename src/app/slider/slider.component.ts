@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ElementRef,Renderer2, ViewChild, HostListener, ViewChildren, QueryList, Input, Directive, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, AfterViewInit, ElementRef,Renderer2, ViewChild, HostListener, ViewChildren, QueryList, Input, Directive, OnInit, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { SquareComponent } from './square/square.component';
 // import { SquareComponent } from './square/square.component';
 
@@ -12,6 +12,7 @@ import { SquareComponent } from './square/square.component';
   styleUrls: ['./slider.component.css']
 })
 export class SliderComponent implements OnInit, AfterViewInit {
+ 
  
 
   
@@ -37,11 +38,23 @@ export class SliderComponent implements OnInit, AfterViewInit {
 
   realNumberLength:number;
 
+  
+
 
   @Input() Length: number;
-  @Input() set BPos(val){this.BeginningPos = (val * 100)/this.Length; console.log("B: " + this.BeginningPos);};
-  @Input() set EPos(val){this.EndingPos = (val * 100)/this.Length; console.log("E: " + this.EndingPos);};
 
+  @Input() set BPos(val){
+    this.BeginningPos = (val * 100)/this.Length; console.log("B: " + this.BeginningPos);
+  };
+  @Input() set EPos(val){
+    this.EndingPos = (val * 100)/this.Length; console.log("E: " + this.EndingPos);
+  };
+
+  // ngOnChanges(changes: SimpleChanges) {
+  //   this.BeginningPos = (changes.BPos.currentValue * 100)/this.Length; console.log("B2: " + this.BeginningPos);
+  //   this.EndingPos = (changes.EPos.currentValue * 100)/this.Length; console.log("E2: " + this.EndingPos);
+
+  // }
 
  
   @Output() beggingEnding: EventEmitter<number[]> = new EventEmitter<number[]>();

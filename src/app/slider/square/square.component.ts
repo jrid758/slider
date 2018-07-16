@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ElementRef,Renderer2, ViewChild, HostListener, ContentChild, Input, Output, EventEmitter } from '@angular/core';
+import { Component, AfterViewInit, ElementRef,Renderer2, ViewChild, HostListener, ContentChild, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 
 
 
@@ -19,6 +19,12 @@ export class SquareComponent implements AfterViewInit{
   
     this.rd.setStyle(this.el.nativeElement, 'left', (val-(((100*this.el.nativeElement.clientWidth)/this.containerLength)/2)) + '%');
   } 
+
+  // ngOnChanges(changes: SimpleChanges) {
+  //   console.log("WhatChanges",changes.position.currentValue);
+  //   //this.rd.setStyle(this.el.nativeElement, 'left', (changes.position.currentValue-(((100*this.el.nativeElement.clientWidth)/this.containerLength)/2)) + '%');
+
+  // }
 
   @Output() moved: EventEmitter<number> = new EventEmitter<number>();
 

@@ -8,10 +8,11 @@
       </select>
     </div> -->
   
-  <div class="effectnamespace" [style.width]="effectLength"><button></button></div>
+  <div class="effectnamespace" [style.width]="effectLength"></div>
   <div class="effectsliderspace" [style.width]="effectLength">
       <div style="width:600px; height:30px;">
-          <slider [BPos]='0' [EPos]='50' [Length]='200' (beggingEnding)="placeholder($event)"></slider>
+          <slider [BPos]='start' [EPos]='end' [Length]='timeLengthofComp' (beggingEnding)="updateTimeEnds($event)"></slider>
+          <!-- <slider [BPos]='start' [EPos]='end' [Length]='7' (beggingEnding)="updateTimeEnds($event)"></slider> -->
         </div> 
     <!-- <nouislider [connect]="true" [min]="min" [max]="max" [(ngModel)]="someRange"  (ngModelChange)="sliderNum($event)"></nouislider> -->
   </div>

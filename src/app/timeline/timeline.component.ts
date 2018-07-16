@@ -20,6 +20,7 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   @Output() update: EventEmitter<any> = new EventEmitter<any>();
   @Output() updateAll: EventEmitter<any> = new EventEmitter<any>();
 
+  
   @Input()
   set playFileLoad(val: any){
     console.log("FILE CHANGED", this.layerIDs);

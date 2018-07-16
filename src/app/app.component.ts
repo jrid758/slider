@@ -42,8 +42,8 @@ export class AppComponent implements AfterViewInit {
               effects: [
                 {
                   type: "zoomOut",
-                  start: 4,
-                  end: 5
+                  start: .2,
+                  end: 2
                 }
               ] 
             },
