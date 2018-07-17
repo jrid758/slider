@@ -6,7 +6,7 @@
 
 .square {
     background-color: red;
-    border-radius: 100% / 50%;
+    /* border-radius: 100% / 50%; */
     width: 20px;
     height: 100%;
     position: absolute;

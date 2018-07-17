@@ -108,6 +108,10 @@ export class LayerComponent implements OnInit, AfterContentInit {
     // this._objectservice.removeLayerObject(this.layerName);
 }
 
+timeUpdateEffect(update) {
+
+}
+
 // addText(): any{
 //   let UUID = this.generateUUID()
 //   let copy = UUID.slice(0,4).toString();

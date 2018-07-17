@@ -10,10 +10,10 @@
   
   <div class="effectnamespace" [style.width]="effectLength"></div>
   <div class="effectsliderspace" [style.width]="effectLength">
-      <div style="width:600px; height:30px;">
+      <!-- <div style="width:500px; height:30px;"> -->
           <slider [BPos]='start' [EPos]='end' [Length]='timeLengthofComp' (beggingEnding)="updateTimeEnds($event)"></slider>
           <!-- <slider [BPos]='start' [EPos]='end' [Length]='7' (beggingEnding)="updateTimeEnds($event)"></slider> -->
-        </div> 
+        <!-- </div>  -->
     <!-- <nouislider [connect]="true" [min]="min" [max]="max" [(ngModel)]="someRange"  (ngModelChange)="sliderNum($event)"></nouislider> -->
   </div>
 </div>
