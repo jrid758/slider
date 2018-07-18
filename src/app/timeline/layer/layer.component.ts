@@ -109,7 +109,10 @@ export class LayerComponent implements OnInit, AfterContentInit {
 }
 
 timeUpdateEffect(update) {
-
+  this.playFile.comps[this.playFile.currentComp].comp[update.layer].effects[update.effectsPlace].start = update.times[0];
+  this.playFile.comps[this.playFile.currentComp].comp[update.layer].effects[update.effectsPlace].end = update.times[1];
+  console.log("Playfile updated: ", this.playFile);
+  this.updateAll.emit(this.playFile);
 }
 
 // addText(): any{

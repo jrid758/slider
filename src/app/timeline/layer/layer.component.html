@@ -22,7 +22,7 @@
       <!-- <div *ngIf='this.playFile.comps[this.playFile.currentComp].comps.comp.effects !== []'>  -->
           <!-- <effect *ngFor='let effectProps of this.playFile.comps[this.playFile.currentComp].comp.effects' [effect]='effectProps' [layerName]='layerName'></effect> -->
         <!-- <effect *ngFor='let effectProps of this.playFile.comps[this.playFile.currentComp].comps.comp.effects'></effect> -->
-        <effect *ngFor='let effectProps of this.playFile.comps[0].comp[layerNumber].effects' [effectProps]='effectProps' [timeLengthofComp]='this.playFile.comps[0].videoLength' [Beginning]='effectProps.start' [Ending]='effectProps.end' (hold)="stopMoving($event)" (effectTimeUpdate)="timeUpdateEffect($event)" [playFileLoad]="playFile"></effect>
+        <effect *ngFor='let effectProps of this.playFile.comps[0].comp[layerNumber].effects; let i = index' [currentLayer]='layerNumber' [effectsIndexNumber]='i' [effectProps]='effectProps' [timeLengthofComp]='this.playFile.comps[0].videoLength' [Beginning]='effectProps.start' [Ending]='effectProps.end' [playFileLoad]="playFile" (hold)="stopMoving($event)" (effectTimeUpdate)="timeUpdateEffect($event)" ></effect>
       <!-- </div>  -->
    </div> 
 </div>

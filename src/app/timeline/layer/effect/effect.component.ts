@@ -37,6 +37,10 @@ export class EffectComponent implements OnInit, AfterViewInit {
     this.playFile = val;
     console.log("playFileForEffects", this.playFile);
   }
+
+
+  @Input() currentLayer: any;
+  @Input() effectsIndexNumber: any;
   @Input() effectProps: any;
   @Input() timeLengthofComp:number;
   @Input() Beginning:number;
@@ -49,6 +53,7 @@ export class EffectComponent implements OnInit, AfterViewInit {
   
   }
 
+  //Fixes sliders not being updated//
   ngOnChanges(...args: any[]) {
     console.log('onChange fired');
     console.log('changing', args);
@@ -56,8 +61,20 @@ export class EffectComponent implements OnInit, AfterViewInit {
     this.end = this.Ending;
   }
 
-  updateTimeEnds($event) {
-    console.log("TIMEBACK: ", $event);
+  updateTimeEnds(times) {
+    
+    let obj = {
+      properties: this.effectProps,
+      layer: this.currentLayer,
+      effectsPlace: this.effectsIndexNumber,
+      times
+    }
+    console.log("OBJ: ", obj);
+    this.effectTimeUpdate.emit(obj);
+  }
+
+  removeEffect() {
+  
   }
 
 }
