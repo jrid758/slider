@@ -18,10 +18,14 @@ export class EffectComponent implements OnInit, AfterViewInit {
   playFile: string;
   start: number;
   end: number;
+  directionSelected;
+  optionSelect;
+  
 
   @ContentChildren(LayerComponent) targets;
   @Output() hold: EventEmitter<any> = new EventEmitter<any>();
   @Output() effectTimeUpdate: EventEmitter<any> = new EventEmitter<any>();
+  @Output() removeEffect: EventEmitter<any> = new EventEmitter<any>();
   @HostListener('mouseenter') mouseover() {
     console.log("IN",this.targets);
     this.hold.emit(true);
@@ -46,7 +50,7 @@ export class EffectComponent implements OnInit, AfterViewInit {
   @Input() Beginning:number;
   @Input() Ending:number;
   constructor() {
-   
+    this.optionSelect = ["left","right","up","down"];
   }
 
   ngOnInit() {
@@ -73,8 +77,18 @@ export class EffectComponent implements OnInit, AfterViewInit {
     this.effectTimeUpdate.emit(obj);
   }
 
-  removeEffect() {
-  
+  removeEffectFunc() {
+    let obj = {
+      properties: this.effectProps,
+      layer: this.currentLayer,
+      effectsPlace: this.effectsIndexNumber
+    }
+    console.log("OBJ: ", obj);
+    this.removeEffect.emit(obj);
+  }
+
+  updateSelect(selected) {
+
   }
 
 }

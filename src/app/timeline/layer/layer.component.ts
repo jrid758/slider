@@ -115,6 +115,12 @@ timeUpdateEffect(update) {
   this.updateAll.emit(this.playFile);
 }
 
+removeEffect(remove) {
+  this.playFile.comps[this.playFile.currentComp].comp[remove.layer].effects.splice(remove.effectsPlace,1);
+  console.log("Playfile updated2: ", this.playFile);
+  this.updateAll.emit(this.playFile);
+}
+
 // addText(): any{
 //   let UUID = this.generateUUID()
 //   let copy = UUID.slice(0,4).toString();

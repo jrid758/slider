@@ -2,10 +2,12 @@
   effect works!
 </p> -->
 <div class="effect no-drag" >
-    <div class="effectName">{{effectProps.type}}<button class="deleteButton" (click)="removeEffect()">X</button>
-      <!-- <select class='moveinsel' *ngIf='effect.direction !== ""' (change)="updateSelect(selected.value)" [(ngModel)]="directionSelected" #selected>
-          <option *ngFor="let option of optionSelect" [ngValue]="option">{{option}}</option>
-      </select> -->
+    <div class="effectName">{{effectProps.type}}<button class="deleteButton" (click)="removeEffectFunc()">X</button>
+      <!-- <select class='moveinsel' *ngIf='effect.direction !== ""' (change)="updateSelect(selected.value)" [(ngModel)]="directionSelected" #selected></select> -->
+      <select class='moveinsel' *ngIf='effectProps.direction !== ""'>
+          <!-- <option *ngFor="let option of optionSelect" [ngValue]="option">{{option}}</option> -->
+          <option *ngFor="let option of optionSelect" >{{option}}</option>
+      </select>
     </div>
   
   <div class="effectnamespace" [style.width]="effectLength"></div>
