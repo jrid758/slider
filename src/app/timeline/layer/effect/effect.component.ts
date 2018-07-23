@@ -63,6 +63,7 @@ export class EffectComponent implements OnInit, AfterViewInit {
     console.log('changing', args);
     this.start = this.Beginning;
     this.end = this.Ending;
+    //this.timeLengthofComp = 6;
   }
 
   updateTimeEnds(times) {

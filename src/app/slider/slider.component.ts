@@ -37,6 +37,8 @@ export class SliderComponent implements OnInit, AfterViewInit {
   EndingPos:number= 0;
 
   realNumberLength:number;
+  start:number;
+  end:number;
 
   
 
@@ -44,10 +46,12 @@ export class SliderComponent implements OnInit, AfterViewInit {
   @Input() Length: number;
 
   @Input() set BPos(val){
-    this.BeginningPos = (val * 100)/this.Length; console.log("B: " + this.BeginningPos);
+    this.start = (val * 100)/this.Length; console.log("B: " + this.BeginningPos);
+    this.BeginningPos = this.start;
   };
   @Input() set EPos(val){
-    this.EndingPos = (val * 100)/this.Length; console.log("E: " + this.EndingPos);
+    this.end = (val * 100)/this.Length; console.log("E: " + this.EndingPos);
+    this.EndingPos = this.end;
   };
 
   // ngOnChanges(changes: SimpleChanges) {
@@ -71,6 +75,16 @@ export class SliderComponent implements OnInit, AfterViewInit {
     // this.squareBegin = this.BeginningPos;
     
 
+  }
+
+  //Fixes sliders not being updated// Just trying on this one
+  ngOnChanges(...args: any[]) {
+    console.log('onChange fired');
+    console.log('changing', args);
+    this.BeginningPos = this.start;
+    this.EndingPos = this.end;
+    // this.start = this.Beginning;
+    // this.end = this.Ending;
   }
 
   ngOnInit(): void {

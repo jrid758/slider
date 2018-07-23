@@ -138,8 +138,10 @@ removeEffect(remove) {
 // }
 
 addEffect(effectObj) {
-  let letEffectToAdd = "moveIn";
+  
+  let letEffectToAdd = "Move In";
   console.log("addEFFECT")
+  
   this.playFile.comps[0].comp.forEach(element => {
     if(element.id === this.layerID) {
       let effectFound = false;
@@ -151,11 +153,18 @@ addEffect(effectObj) {
       if(!effectFound) {
         //effects structure
         element.effects.push({
-          type: "moveIn",
-          start: .1,
+          type: "Move In",
+          direction: "right",
+          start: 1,
           end: 3
        });
+       
         this.updateAll.emit(this.playFile);
+        //this is rough, need to fix
+        if(this.state === 'small') {
+          this.animateMe();
+        }
+        
       }
 
     }
