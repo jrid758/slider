@@ -172,7 +172,8 @@ playFileUpdate(update){
     
   } else {
     console.log("-------------Running Third",update);
-    this.playFile.comps[this.playFile.currentComp].comp.push(update);
+    //Object Layer to front of array
+    this.playFile.comps[this.playFile.currentComp].comp.unshift(update);
     let updatePlayFile = this.playFile;
     this.playFile = Object.assign({}, updatePlayFile);
     //this.playFile = updatePlayFile;

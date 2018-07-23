@@ -13,6 +13,7 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   end: number;
   playFiles: any;
   updateZdepthOrder: boolean = false;
+  howManyObjects:number;
   @ViewChild('target', {read: ViewContainerRef}) target;
   @ViewChildren('layerID') layerIDs;
   @ViewChildren('hold', { read: ElementRef }) hold:QueryList<ElementRef>;
@@ -27,6 +28,23 @@ export class TimelineComponent implements OnInit, AfterViewInit {
     this.playFiles = val;
     // const drake = this.dragulaService.find('bag-one').drake;
     // const models = drake.models;
+
+    //detect if new item was added
+    if(this.howManyObjects !== this.playFiles.comps[0].comp.length) {
+      this.onDrop(56);
+        //higher zdepth on top
+   
+        this.playFiles.comps[0].comp.sort((a,b) => {
+          console.log(b.copy,b.zdepth,a.copy,a.zdepth)
+          return b.zdepth - a.zdepth;
+        });
+
+      this.updateZdepthOrder = false;
+      this.howManyObjects = this.playFiles.comps[0].comp.length;
+      
+    }
+
+    
     if(this.updateZdepthOrder) {
       this.onDrop(56);
         //higher zdepth on top
@@ -37,7 +55,10 @@ export class TimelineComponent implements OnInit, AfterViewInit {
         });
 
       this.updateZdepthOrder = false;
-    } 
+      this.howManyObjects = this.playFiles.comps[0].comp.length;
+    }
+    
+    
     
   
 

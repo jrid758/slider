@@ -31,7 +31,7 @@ export class MenuComponent implements OnInit, AfterViewInit {
       copy: copy,
       left: 30,
       top: 30,
-      zdepth: 10,
+      zdepth: 3,
       color: "purple",
       effects: []
     }
