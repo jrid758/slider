@@ -1,5 +1,5 @@
 .timeline {
-    width: 700px;
+    width: 90vw;
     height: 400px;
     background-color: grey;
 }
@@ -10,11 +10,11 @@
     background-color: #A00079;
     color: red;
     display: inline-block;
-    vertical-align:top;
+    /* vertical-align:top; */
 }
 
 .timelineNumbers {
-    width: 500px;
+    width: calc(100% - 100px);
     height: 20px;
     color: white;
     background-color: #686868;

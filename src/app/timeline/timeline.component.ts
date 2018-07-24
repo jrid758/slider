@@ -14,6 +14,7 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   playFiles: any;
   updateZdepthOrder: boolean = false;
   howManyObjects:number;
+  numbers:any;
   @ViewChild('target', {read: ViewContainerRef}) target;
   @ViewChildren('layerID') layerIDs;
   @ViewChildren('hold', { read: ElementRef }) hold:QueryList<ElementRef>;
@@ -44,7 +45,7 @@ export class TimelineComponent implements OnInit, AfterViewInit {
       
     }
 
-    
+     //did layer change
     if(this.updateZdepthOrder) {
       this.onDrop(56);
         //higher zdepth on top
@@ -85,7 +86,7 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   }
 
   constructor(private dragulaService: DragulaService, private renderer: Renderer2) {
-
+    this.numbers = [0,1,2,3,4,5];
     
     // dragulaService.dropModel.subscribe((value) => {
     //   this.onDropModel(value);

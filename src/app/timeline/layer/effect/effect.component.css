@@ -20,7 +20,7 @@
 
 
 .effectnamespace {
-    width: 500px;
+    width: calc(100% - 100px);
     height: 15px;
     float: right;
     background: repeating-linear-gradient(
@@ -34,7 +34,7 @@
 }
 
 .effectsliderspace {
-    width: 500px;
+    width: calc(100% - 100px);
     height: 15px;
     background-color: #007DFF;
     float: right;

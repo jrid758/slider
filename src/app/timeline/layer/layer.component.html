@@ -13,13 +13,13 @@
    </div>
 </div> -->
 
-<div  class="layer" [style.width]="widthlayer" id={{layerID}} [ngStyle]="{'outline': variableOutline ? '3px solid greenyellow' : '0px solid greenyellow'}">
+<div  class="layer" id={{layerID}} [ngStyle]="{'outline': variableOutline ? '3px solid greenyellow' : '0px solid greenyellow'}">
     <div class="layername">TEXT
         <!-- <span class='toggle' (click)="animateMe()" [@rotateArrow]='stateArrow' [style.visibility]="isEffectEmpty() ? 'visible' : 'hidden'"></span> -->
         <span class='toggle' (click)="animateMe()" [@rotateArrow]='stateArrow'></span>
     </div>
     <div class="layernamespace" [style.width]="widthlayernamespace"><button class="deleteButton" (click)="removeLayer()">X</button><button (click)="addEffect()">ADD EFFECT</button>{{layerID | slice:0:4}}</div>
-    <div >
+    <div>
    
        
         <effect [@myAnim]='state' *ngFor='let effectProps of this.playFile.comps[0].comp[layerNumber].effects; let i = index' [currentLayer]='layerNumber' [effectsIndexNumber]='i' [effectProps]='effectProps' [timeLengthofComp]='this.playFile.comps[0].videoLength' [Beginning]='effectProps.start' [Ending]='effectProps.end' [playFileLoad]="playFile" (hold)="stopMoving($event)" (effectTimeUpdate)="timeUpdateEffect($event)" (removeEffect)="removeEffect($event)"></effect>
