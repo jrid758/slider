@@ -3,3 +3,22 @@
     height: 400px;
     background-color: grey;
 }
+
+.timelineName {
+    height: 20px;
+    width: 100px;
+    background-color: #A00079;
+    color: red;
+    display: inline-block;
+    vertical-align:top;
+}
+
+.timelineNumbers {
+    width: 500px;
+    height: 20px;
+    color: white;
+    background-color: #686868;
+    display: inline-block;
+    vertical-align:top;
+    /* float: right; */
+}

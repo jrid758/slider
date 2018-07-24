@@ -1,10 +1,13 @@
 <div  class="timeline" #target>
- 
+  <div class="timelineName">Layer</div><div class="timelineNumbers">
+      <!-- <timelineNumbers [number]="number" *ngFor="let number of timeLength"></timelineNumbers> -->
+      <!-- <div *ngFor="let number of Arr(num).fill(5); let i = index">{{i}}</div> -->
+  </div>
   <!-- <app-layer *ngFor="let practiceStuff of practiceStuffs">{{practiceStuff}}</app-layer> -->
   <!-- <app-layer *ngFor="let practiceStuff of practiceStuffs[0].comp">{{practiceStuff.number}}</app-layer> -->
   <!-- <app-layer *ngFor="let practiceStuff of playFiles.comps[0].comp">{{practiceStuff.number}}</app-layer> -->
   <div [dragula]='"bag-one"' [dragulaModel]='playFiles.comps[0].comp' >
-      <div *ngFor="let playFile of playFiles.comps[0].comp; let i = index" [id]="playFile.id" #hold>{{i}}
+      <div *ngFor="let playFile of playFiles.comps[0].comp; let i = index" [id]="playFile.id" #hold>
        <app-layer   [layerNumber]="i" [layerID]="playFile.id" [playFileLoad]="playFiles" (updateAll)="playFileAllUpdate($event)" #layerID (click)="select(layerID)" (hold)="holdLayer($event)"></app-layer>
     </div>
  </div>
