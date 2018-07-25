@@ -227,7 +227,7 @@ export class TimelineComponent implements OnInit, AfterViewInit {
     // this.renderer.setAttribute(this.number.nativeElement,'width','10px');
     // this.renderer.setAttribute(this.numberSpace.nativeElement,'width','50px');
     this.num = 0;
-    this.numSpace = 20;
+    this.numSpace = 19.5;
   }
 
 
