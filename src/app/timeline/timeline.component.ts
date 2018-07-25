@@ -15,9 +15,16 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   updateZdepthOrder: boolean = false;
   howManyObjects:number;
   numbers:any;
+  num:number;
+  numSpace:number;
+
+
   @ViewChild('target', {read: ViewContainerRef}) target;
   @ViewChildren('layerID') layerIDs;
   @ViewChildren('hold', { read: ElementRef }) hold:QueryList<ElementRef>;
+
+  @ViewChild('number') number: ElementRef;
+  @ViewChild('numberSpace') numberSpace: ElementRef;
 
   @Output() update: EventEmitter<any> = new EventEmitter<any>();
   @Output() updateAll: EventEmitter<any> = new EventEmitter<any>();
@@ -171,6 +178,8 @@ export class TimelineComponent implements OnInit, AfterViewInit {
     //     }
     //   });
     // }
+
+    this.updateTimelineNumbers();
   }
 
  
@@ -212,6 +221,13 @@ export class TimelineComponent implements OnInit, AfterViewInit {
       }
     });
    
+  }
+
+  updateTimelineNumbers() {
+    // this.renderer.setAttribute(this.number.nativeElement,'width','10px');
+    // this.renderer.setAttribute(this.numberSpace.nativeElement,'width','50px');
+    this.num = 0;
+    this.numSpace = 20;
   }
 
 

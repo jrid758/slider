@@ -1,7 +1,7 @@
 <div  class="timeline" #target>
-<div class="timelineName">Layer</div><div class="timelineNumbers" #timeRepeat>
-  <div *ngFor="let number of numbers; let i = index" style="display:inline-block;text-align: center"><div style="display:inline-block;width:10px">{{i}}</div><div style="display:inline-block;width:30px" *ngIf="(i + 1) !== numbers.length">*</div></div>
-</div>
+<div class="timelineName">Layer</div><div class="timelineNumbers" #timeRepeat><div *ngFor="let number of numbers; let i = index" style="display:inline-block;" [style.width.%]="num">{{1}}<div style="display:inline-block;" [style.width.%]="numSpace"></div></div></div>
+  <!-- <div *ngFor="let number of numbers; let i = index" style="display:inline-block;text-align: center" class="test"><div style="display:inline-block;" [style.width.%]="num" #number>{{i}}</div><div style="display:inline-block;" *ngIf="(i + 1) !== numbers.length" [style.width.%]="numSpace" #numberSpace>*</div></div> -->
+
       <!-- <timelineNumbers [number]="number" *ngFor="let number of timeLength"></timelineNumbers> -->
       <!-- <div *ngFor="let number of Arr(num).fill(5); let i = index">{{i}}</div> -->
   
