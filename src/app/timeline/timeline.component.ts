@@ -229,7 +229,7 @@ export class TimelineComponent implements OnInit, AfterViewInit {
     // this.renderer.setAttribute(this.numberSpace.nativeElement,'width','50px');
     this.numbers = Array(this.playFiles.comps[0].videoLength + 1).fill(0).map((x,i)=>i);
     let spacePercentage = 100 / this.playFiles.comps[0].videoLength;
-    spacePercentage = spacePercentage - .4;
+    spacePercentage = spacePercentage * .975;
     this.num = 0;
     this.numSpace = spacePercentage;
   }
