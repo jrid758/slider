@@ -12,12 +12,15 @@ export class SquareComponent implements AfterViewInit{
 
   // @ContentChild('parentSlider') parent:ElementRef;
 
-  @Input() containerLength;
+  @Input() set containerLength(val) {
+    this.savedContainerLength = val;
+    this.rd.setStyle(this.el.nativeElement, 'left', (this.currentPosition-(((100*this.el.nativeElement.clientWidth)/this.savedContainerLength)/2)) + '%');
+  };
 
   @Input() set position(val) {
     //this.rd.setStyle(this.elemRef.nativeElement.lastElementChild, 'left', (val-10) + 'px');
-  
-    this.rd.setStyle(this.el.nativeElement, 'left', (val-(((100*this.el.nativeElement.clientWidth)/this.containerLength)/2)) + '%');
+    this.currentPosition = val;
+    this.rd.setStyle(this.el.nativeElement, 'left', (this.currentPosition-(((100*this.el.nativeElement.clientWidth)/this.savedContainerLength)/2)) + '%');
   } 
 
   // ngOnChanges(changes: SimpleChanges) {
@@ -34,6 +37,8 @@ export class SquareComponent implements AfterViewInit{
   isDown: boolean = false;
   numberX: number;
   posOffest: number = 0;
+  currentPosition;
+  savedContainerLength;
 
   constructor(private rd: Renderer2, private elemRef: ElementRef) {
     this.isDown = false;

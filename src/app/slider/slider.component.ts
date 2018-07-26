@@ -44,6 +44,8 @@ export class SliderComponent implements OnInit, AfterViewInit {
   EPosForUpdate;
 
   changeLength;
+
+  containerWidth;
   
   
 
