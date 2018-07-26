@@ -40,19 +40,38 @@ export class SliderComponent implements OnInit, AfterViewInit {
   start:number;
   end:number;
 
+  BPosForUpdate;
+  EPosForUpdate;
+
+  changeLength;
+  
   
 
 
-  @Input() Length: number;
+  //@Input() Length: number;
+  @Input()
+  set Length(val: number) {
+    this.changeLength = val;
+
+    this.start = (this.BPosForUpdate * 100)/this.changeLength; console.log("B: " + this.BeginningPos);
+    this.BeginningPos = this.start;
+
+    this.end = (this.EPosForUpdate * 100)/this.changeLength; console.log("E: " + this.EndingPos);
+    this.EndingPos = this.end;
+  };
+
 
   @Input() set BPos(val){
-    this.start = (val * 100)/this.Length; console.log("B: " + this.BeginningPos);
+    this.BPosForUpdate = val;
+    this.start = (this.BPosForUpdate * 100)/this.changeLength; console.log("B: " + this.BeginningPos);
     this.BeginningPos = this.start;
   };
   @Input() set EPos(val){
-    this.end = (val * 100)/this.Length; console.log("E: " + this.EndingPos);
+    this.EPosForUpdate = val;
+    this.end = (this.EPosForUpdate * 100)/this.changeLength; console.log("E: " + this.EndingPos);
     this.EndingPos = this.end;
   };
+
 
   // ngOnChanges(changes: SimpleChanges) {
   //   this.BeginningPos = (changes.BPos.currentValue * 100)/this.Length; console.log("B2: " + this.BeginningPos);
@@ -117,8 +136,8 @@ export class SliderComponent implements OnInit, AfterViewInit {
   }
 
   emitPositions() {
-    this.begEnd[0] = this.BeginningPos * this.Length * .01;
-    this.begEnd[1] = this.EndingPos * this.Length * .01;
+    this.begEnd[0] = this.BeginningPos * this.changeLength * .01;
+    this.begEnd[1] = this.EndingPos * this.changeLength * .01;
     this.beggingEnding.emit(this.begEnd);
     console.log("test: " + this.begEnd);
   }
