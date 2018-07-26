@@ -90,10 +90,11 @@ export class TimelineComponent implements OnInit, AfterViewInit {
         }
       });
     }
+    this.updateTimelineNumbers();
   }
 
   constructor(private dragulaService: DragulaService, private renderer: Renderer2) {
-    this.numbers = [0,1,2,3,4,5];
+    this.numbers = [0,1,2,3,4,5,6];
     
     // dragulaService.dropModel.subscribe((value) => {
     //   this.onDropModel(value);
@@ -226,8 +227,11 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   updateTimelineNumbers() {
     // this.renderer.setAttribute(this.number.nativeElement,'width','10px');
     // this.renderer.setAttribute(this.numberSpace.nativeElement,'width','50px');
+    this.numbers = Array(this.playFiles.comps[0].videoLength + 1).fill(0).map((x,i)=>i);
+    let spacePercentage = 100 / this.playFiles.comps[0].videoLength;
+    spacePercentage = spacePercentage - .4;
     this.num = 0;
-    this.numSpace = 19.5;
+    this.numSpace = spacePercentage;
   }
 
 

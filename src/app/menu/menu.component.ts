@@ -1,4 +1,5 @@
-import { Component, OnInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Output, EventEmitter, Input } from '@angular/core';
+
 
 @Component({
   selector: 'app-menu',
@@ -12,6 +13,17 @@ export class MenuComponent implements OnInit, AfterViewInit {
 
   @Output() newText: EventEmitter<any> = new EventEmitter<any>();
 
+  compLength:any = 6;
+  playFiles;
+
+  @Output() updateAll: EventEmitter<any> = new EventEmitter<any>();
+
+  @Input()
+  set playFileLoad(val: any){
+    this.playFiles = val;
+    this.compLength = this.playFiles.comps[0].videoLength;
+  }
+
   constructor() { }
 
   ngAfterViewInit(): void {
@@ -19,6 +31,12 @@ export class MenuComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+
+  }
+
+  updateTime() {
+    this.playFiles.comps[0].videoLength = this.compLength;
+    this.playFileAllUpdate(this.playFiles);
 
   }
 
@@ -36,6 +54,11 @@ export class MenuComponent implements OnInit, AfterViewInit {
       effects: []
     }
     this.newText.emit(obj);
+}
+
+playFileAllUpdate(event) {
+  this.updateAll.emit(event);
+
 }
 
 

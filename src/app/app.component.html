@@ -5,7 +5,7 @@
     </h1>    
 </div>
 <hr>
-<app-menu (newText)="playFileUpdate($event)"></app-menu>
+<app-menu (newText)="playFileUpdate($event)" [playFileLoad]="playFile" (updateAll)="playFileAllUpdate($event)"></app-menu>
 <hr>
 
 <app-timeline [playFileLoad]="playFile" (update)="playFileAllUpdate($event)" (updateAll)="playFileAllUpdate($event)" ></app-timeline>
