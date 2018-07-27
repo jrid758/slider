@@ -15,7 +15,7 @@ export class EffectComponent implements OnInit, AfterViewInit {
   }
 
   effectLength: string;
-  playFile: string;
+  playFile: any;
   start: number;
   end: number;
   directionSelected;
@@ -26,6 +26,7 @@ export class EffectComponent implements OnInit, AfterViewInit {
   @Output() hold: EventEmitter<any> = new EventEmitter<any>();
   @Output() effectTimeUpdate: EventEmitter<any> = new EventEmitter<any>();
   @Output() removeEffect: EventEmitter<any> = new EventEmitter<any>();
+  @Output() updateEffectDirection: EventEmitter<any> = new EventEmitter<any>();
   @HostListener('mouseenter') mouseover() {
     console.log("IN",this.targets);
     this.hold.emit(true);
@@ -88,8 +89,11 @@ export class EffectComponent implements OnInit, AfterViewInit {
     this.removeEffect.emit(obj);
   }
 
-  updateSelect(selected) {
-    console.log("selectedUpdate:",selected);
+  updateSelectDirection(selected) {
+    // this.playFile
+    this.playFile.comps[this.playFile.currentComp].comp[this.currentLayer].effects[this.effectsIndexNumber].direction = selected;
+    this.updateEffectDirection.emit(this.playFile);
+    console.log("selectedUpdate:",selected,this.playFile);
   }
 
 }

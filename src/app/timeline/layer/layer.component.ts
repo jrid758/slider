@@ -42,7 +42,7 @@ export class LayerComponent implements OnInit, AfterContentInit {
   state: string = 'small';
   stateArrow: string = 'right';
   variableOutline = false;
-  playFile;
+  playFile: any;
 
   widthlayer: string;
   widthlayernamespace: string;
@@ -52,6 +52,7 @@ export class LayerComponent implements OnInit, AfterContentInit {
   @Input()
   set playFileLoad(val: any){
     this.playFile = val;
+    this.playFile.comps[0].comp[0];
     console.log("Layer Input: ", this.playFile);
   }
 
@@ -171,6 +172,10 @@ addEffect(effectObj) {
   });
 
 
+}
+
+updateEffectDirection($event) {
+  this.updateAll.emit($event);
 }
 
 

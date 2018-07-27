@@ -4,7 +4,7 @@
 <div class="effect no-drag" >
     <div class="effectName">{{effectProps.type}}<button class="deleteButton" (click)="removeEffectFunc()">X</button>
       <!-- <select class='moveinsel' *ngIf='effect.direction !== ""' (change)="updateSelect(selected.value)" [(ngModel)]="directionSelected" #selected></select> -->
-      <select class='moveinsel' *ngIf='effectProps.direction !== ""' (change)="updateSelect(selected.value)"  #selected>
+      <select class='moveinsel' *ngIf='effectProps.direction !== ""' (change)="updateSelectDirection(selected.value)"  #selected>
           <!-- <option *ngFor="let option of optionSelect" [ngValue]="option">{{option}}</option> -->
           <option *ngFor="let option of optionSelect" [selected]="effectProps.direction === option">{{option}}</option>
       </select>

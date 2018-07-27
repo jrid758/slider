@@ -22,7 +22,7 @@
     <div>
    
        
-        <effect [@myAnim]='state' *ngFor='let effectProps of this.playFile.comps[0].comp[layerNumber].effects; let i = index' [currentLayer]='layerNumber' [effectsIndexNumber]='i' [effectProps]='effectProps' [timeLengthofComp]='this.playFile.comps[0].videoLength' [Beginning]='effectProps.start' [Ending]='effectProps.end' [playFileLoad]="playFile" (hold)="stopMoving($event)" (effectTimeUpdate)="timeUpdateEffect($event)" (removeEffect)="removeEffect($event)"></effect>
+        <effect [@myAnim]='state' *ngFor='let effectProps of this.playFile.comps[0].comp[layerNumber].effects; let i = index' [currentLayer]='layerNumber' [effectsIndexNumber]='i' [effectProps]='effectProps' [timeLengthofComp]='this.playFile.comps[0].videoLength' [Beginning]='effectProps.start' [Ending]='effectProps.end' [playFileLoad]="playFile" (hold)="stopMoving($event)" (effectTimeUpdate)="timeUpdateEffect($event)" (removeEffect)="removeEffect($event)" (updateEffectDirection)="updateEffectDirection($event)"></effect>
     
    </div> 
 </div>
