@@ -89,7 +89,7 @@ export class EffectComponent implements OnInit, AfterViewInit {
   }
 
   updateSelect(selected) {
-
+    console.log("selectedUpdate:",selected);
   }
 
 }
