@@ -142,6 +142,70 @@ animate() {
 
 animateObjects() {
 console.log(this.now);
+// runAnimationOnChildren(startTime, now){
+//   let current = this.currentAniTime(startTime, now);
+//   for(let element of this.app.stage.children) {
+//       console.log("RUNNING ANIMATION***********************" + element.name);
+//       if(element.name !== "stage"){
+//         let currentObject = this._objectservice.getObjectByLayerName(element.name);
+      
+//           if(element.type == "video") {
+//               current = this.currentAniTime(startTime, now);
+//               element.texture.baseTexture.source.pause();
+//               element.texture.baseTexture.source.currentTime = current/1000;
+//               element.texture.baseTexture.source.play();
+//           }
+
+
+//       for(let effect of currentObject.effect) {
+//           let timeStart = effect.timeStart * 1000;
+//           let timeEnd = effect.timeEnd * 1000;
+//           console.log("start: " + timeStart + "end: " + timeEnd);
+//           console.log("EFFECT ANIMATION***********************" + effect.type);
+//                   //--------------------
+//                   //Effect type MoveIn
+//                   //--------------------
+//                   if(effect.type === "moveIn"){
+
+//                       //Set beginning placement
+//                       console.log("-----------------------------------PlacementX: " + timeStart + " vs " + timeEnd + " vs " + this.currentAniTime(startTime, now));
+//                       if(timeStart > this.currentAniTime(startTime, now)){
+//                        element.x = effect.xS;
+//                        console.log("-----------------------------------PlacementX: " + element.x);
+//                        element.y = effect.yS;
+//                        console.log("-----------------------------------PlacementY: " + element.y);
+//                       }
+//                       //Start Moving  
+//                       if(timeStart < this.currentAniTime(startTime, now) && timeEnd > this.currentAniTime(startTime, now)){
+//                           console.log("Curr AniTime & Start: " + this.currentAniTime(startTime, now) + " " + timeStart);
+//                           let current = this.currentAniTime(startTime, now) - timeStart;
+//                           console.log("Current Done: " + current);
+//                           let aniPercentDone = current / (timeEnd - timeStart);
+//                           console.log("Percent Done: " + aniPercentDone);
+//                           let totalDistanceX = effect.xE - effect.xS;
+//                           let totalDistanceY = effect.yE - effect.yS;
+
+//                           console.log("Total Distance: " + totalDistanceX);
+//                           element.x = (totalDistanceX * aniPercentDone) + effect.xS;
+
+//                           console.log("What so farY: " + totalDistanceY * aniPercentDone);
+//                           element.y = (totalDistanceY * aniPercentDone) + effect.yS;
+//                       }
+//                       //Above if stops at 99%, this completes the last frame
+//                       if(timeEnd < this.currentAniTime(startTime, now)){
+//                           element.x = effect.xE;
+//                           element.y = effect.yE;
+//                           console.log("TIME END***********************");
+//                       }
+
+//                   }
+//               }
+//           }
+//       }
+// }
+
+
+
 
 
 }
