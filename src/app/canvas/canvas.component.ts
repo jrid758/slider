@@ -84,6 +84,72 @@ export class CanvasComponent implements OnInit, AfterViewInit {
     }
   }
 
+/////////////////////////////
+///Animation
+///////////////////////////////
+
+stop = false;
+frameCount = 0;
+fps = 30;
+fpsInterval;
+startTime;
+now;
+then;
+elapsed;
+
+
+// initialize the timer variables and start the animation
+
+startAnimating(fps = 5) {
+    this.fpsInterval = 1000 / fps;
+    this.then = Date.now();
+    this.startTime = this.then;
+    this.animate();
+}
+
+animate() {
+
+  
+    // calc elapsed time since last loop
+    this.now = Date.now();
+    this.elapsed = this.now - this.then;
+
+   // request another frame
+    if((this.now - this.startTime) <= (3 * 1000)) {
+    requestAnimationFrame(this.animate.bind(this));
+    }
+   
+
+   
+
+   // if enough time has elapsed, draw the next frame
+
+   if (this.elapsed > this.fpsInterval) {
+
+       // Get ready for next frame by setting then=now, but also adjust for your
+       // specified fpsInterval not being a multiple of RAF's interval (16.7ms)
+       this.then = this.now - (this.elapsed % this.fpsInterval);
+
+       // Put your drawing code here
+      this.animateObjects();
+
+   }
+
+
+
+}
+
+
+animateObjects() {
+console.log(this.now);
+
+
+}
+
+
+
+
+
   canvasDraw() {
 
 
