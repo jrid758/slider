@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, trigger, state, style, transition, animate, Output, EventEmitter, AfterContentInit, HostListener } from '@angular/core';
+import { IEffect } from '../../effectI';
 
 @Component({
   selector: 'app-layer',
@@ -153,12 +154,13 @@ addEffect(effectObj) {
       });
       if(!effectFound) {
         //effects structure
-        element.effects.push({
+        let obj: IEffect = {
           type: "Move In",
           direction: "right",
           start: 1,
           end: 3
-       });
+        }
+        element.effects.push(obj);
        
         this.updateAll.emit(this.playFile);
         //this is rough, need to fix

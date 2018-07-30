@@ -12,7 +12,7 @@ import { TimelineComponent } from './timeline/timeline.component';
 import { MenuComponent } from './menu/menu.component';
 import { LayerComponent } from './timeline/layer/layer.component';
 import { FabricService } from './common/fabric.service';
-import { DragulaModule, DragulaService } from '../../node_modules/ng2-dragula';
+import { DragulaModule, DragulaService } from 'ng2-dragula';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EffectComponent } from './timeline/layer/effect/effect.component';
 import { FormsModule } from '@angular/forms';

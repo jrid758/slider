@@ -142,6 +142,33 @@ animate() {
 
 animateObjects() {
 console.log(this.now);
+    this.playFile.comps[this.playFile.currentComp].comp.forEach(currentComp => {
+      currentComp.effects.forEach(effect => {
+
+        let timeStart = effect.start * 1000;
+        let timeEnd = effect.end * 1000;
+
+        if(effect.type === "Move In"){
+
+          //Set beginning placement      
+          // if(timeStart > this.currentAniTime(startTime, now)){
+          //   element.x = effect.xS;
+          //   element.y = effect.yS;
+          // }
+
+         
+          
+        }
+      // if(canvasObj.id === fileObj.id) {
+        
+      //   found = true;
+      //   console.log("Found canvas: " + canvasObj.id + " File " + fileObj.id + " found " + found);
+      // } else {
+      //   objectToDelete = canvasObj;
+      // }
+
+      });
+    });
 // runAnimationOnChildren(startTime, now){
 //   let current = this.currentAniTime(startTime, now);
 //   for(let element of this.app.stage.children) {
