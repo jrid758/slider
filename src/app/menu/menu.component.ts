@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit, Output, EventEmitter, Input } from '@angular/core';
+import { IComp } from '../comp';
 
 
 @Component({
@@ -43,12 +44,22 @@ export class MenuComponent implements OnInit, AfterViewInit {
   addText(): any{
     let UUID = this.generateUUID()
     let copy = UUID.slice(0,4).toString();
-    let obj = {
+    let obj: IComp = {
       id: UUID,
       type: "TEXT",
+
       copy: copy,
+      video: null,
+      image: null,
+
       left: 30,
       top: 30,
+
+      scaleC: 100,
+      alphaC: 100,
+      widthC: 40,
+      heightC: 22.599999999999998,
+
       zdepth: 3,
       color: "purple",
       effects: []

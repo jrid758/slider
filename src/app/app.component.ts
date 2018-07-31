@@ -1,4 +1,5 @@
 import { Component, AfterViewInit, ElementRef,Renderer2, ViewChild, HostListener } from '@angular/core';
+import { IComp } from './comp';
 
 
 
@@ -37,6 +38,10 @@ export class AppComponent implements AfterViewInit {
               copy: "2348",
               left: 0,
               top: 0,
+
+              heightC: 22.599999999999998,
+              widthC: 40,
+
               zdepth: 2,
               color: "red",
               effects: [
@@ -54,6 +59,10 @@ export class AppComponent implements AfterViewInit {
               copy: "8907",
               left: 20,
               top: 50,
+
+              heightC: 22.599999999999998,
+              widthC: 40,
+
               zdepth: 1,
               color: "green",
               effects: [
@@ -77,6 +86,10 @@ export class AppComponent implements AfterViewInit {
               copy: "5906",
               left: 90,
               top: 50,
+
+              heightC: 22.599999999999998,
+              widthC: 80,
+
               zdepth: 0,
               color: "blue",
               effects: [
@@ -106,6 +119,10 @@ export class AppComponent implements AfterViewInit {
               copy: "text3",
               left: 20,
               top: 20,
+
+              heightC: 22.599999999999998,
+              widthC: 40,
+
               effects: []
             },
             {
@@ -144,7 +161,7 @@ playFileAllUpdate(update) {
 
 }
 
-playFileUpdate(update){
+playFileUpdate(update:IComp){
   console.log("-------------Running Second");
 
   let updateFound: boolean = false;
@@ -163,9 +180,19 @@ playFileUpdate(update){
 
     currentObj.id = update.id;
     currentObj.type = update.type;
+
     currentObj.copy = update.copy;
+    currentObj.video = update.video;
+    currentObj.image = update.image;
+
     currentObj.left = update.left;
     currentObj.top = update.top;
+
+    currentObj.scaleC = update.left;
+    currentObj.alphaC = update.alphaC;
+    currentObj.widthC = update.widthC;
+    currentObj.heightC = update.heightC;
+
     currentObj.color = update.color;
     currentObj.zdepth = update.zdepth;
     currentObj.effects = update.effects;

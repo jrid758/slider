@@ -8,8 +8,8 @@ export class FabricService {
 
   constructor() { }
 
-  Textbox(elementCopy, elementLeft, elementTop, id, color, zdepth): any {
-    let obj = new fabric.IText(elementCopy, { left: elementLeft, top: elementTop, fill: color, fontSize: 20, fontFamily: "Gotham", originX: 'center', originY: 'center', id: id, type: 'TEXT', zdepth: zdepth });
+  Textbox(elementCopy, elementLeft, elementTop, id, color, zdepth, widthC, heightC): any {
+    let obj = new fabric.IText(elementCopy, { left: elementLeft, top: elementTop, fill: color, fontSize: 20, fontFamily: "Gotham", originX: 'center', originY: 'center', id: id, type: 'TEXT',height: heightC, width: widthC, zdepth: zdepth });
     return obj;
   }
 

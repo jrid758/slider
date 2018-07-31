@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { FabricService } from '../common/fabric.service';
+import { IComp } from '../comp';
 //import 'fabric';
 //declare const fabric: any;
 
@@ -45,6 +46,10 @@ export class CanvasComponent implements OnInit, AfterViewInit {
     this.canvasDraw();
   }
 
+  widthHeight() {
+    let object = this.canvas.getActiveObject();
+    console.log(object);
+  }
   
  
 
@@ -251,18 +256,29 @@ console.log(this.now);
         this.canvas.on('text:changed', function(options) {
           console.log("UPDATE HAPPENING TEXT: " + options.target.text,options);
           //console.log(options.target.text,options);
-          this.update.emit(
-           {
+            let updateObj:IComp = {
+            id: options.target.id,
             type: options.target.type,
+
             copy: options.target.text,
+            video: null, //need to fix this maybe
+            image: null, //need to fix this maybe
+
+
             left: options.target.left,
             top: options.target.top,
-            id: options.target.id,
+
+            scaleC: 100, //need to fix this maybe
+            alphaC: 100,
+            widthC: options.target.width,
+            heightC: options.target.height,
+            
             zdepth: options.target.zdepth,
             effects: options.target.effects,
             color: options.target.color
-            }
-          );
+
+          }
+          this.update.emit(updateObj);
           console.log(options.target.width);
         }.bind(this));
 
@@ -274,20 +290,32 @@ console.log(this.now);
     
         this.canvas.on('object:modified', function(options) {
           console.log("UPDATE HAPPENING: " + options.target.text,options);
-          this.update.emit(
-           {
-                type: options.target.type,
-                copy: options.target.text,
-                left: options.target.left,
-                top: options.target.top,
-                id: options.target.id,
-                zdepth: options.target.zdepth,
-                effects: options.target.effects,
-                color: options.target.color
-            }
+          let updateObj:IComp = {
+            id: options.target.id,
+            type: options.target.type,
+
+            copy: options.target.text,
+            video: null, //need to fix this maybe
+            image: null, //need to fix this maybe
+
+
+            left: options.target.left,
+            top: options.target.top,
+
+            scaleC: 100, //need to fix this maybe
+            alphaC: 100,
+            widthC: options.target.width,
+            heightC: options.target.height,
+            
+            zdepth: options.target.zdepth,
+            effects: options.target.effects,
+            color: options.target.color
+
+          }
+          this.update.emit(updateObj);
     
     
-          );
+       
         }.bind(this));
 
  
@@ -478,7 +506,7 @@ console.log(this.now);
   createObj(obj) {
     if(obj.type === "TEXT") {
           console.log("Create Object Ran: " + obj.copy);
-          let text = this.fabric.Textbox(obj.copy, obj.left, obj.top, obj.id, obj.color,obj.zdepth);
+          let text = this.fabric.Textbox(obj.copy, obj.left, obj.top, obj.id, obj.color,obj.zdepth,obj.widthC,obj.heightC);
           this.canvas.add(text);
           this.canvas.renderAll();
         }
