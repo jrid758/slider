@@ -101,6 +101,7 @@ startTime;
 now;
 then;
 elapsed;
+firstTimeThru;
 
 
 // initialize the timer variables and start the animation
@@ -109,20 +110,26 @@ startAnimating(fps = 5) {
     this.fpsInterval = 1000 / fps;
     this.then = Date.now();
     this.startTime = this.then;
+    this.firstTimeThru = true;
+    console.log("start",this.startTime);
     this.animate();
 }
 
 animate() {
 
-  
     // calc elapsed time since last loop
-    this.now = Date.now();
-    this.elapsed = this.now - this.then;
+    let now = Date.now();
+    this.elapsed = now - this.then;
+    console.log("s",now,this.elapsed);
+   
 
    // request another frame
-    if((this.now - this.startTime) <= (3 * 1000)) {
+    if((now - this.startTime) <= (this.playFile.comps[this.playFile.currentComp].videoLength * 1000)) {
     requestAnimationFrame(this.animate.bind(this));
     }
+
+    
+     
    
 
    
@@ -133,10 +140,11 @@ animate() {
 
        // Get ready for next frame by setting then=now, but also adjust for your
        // specified fpsInterval not being a multiple of RAF's interval (16.7ms)
-       this.then = this.now - (this.elapsed % this.fpsInterval);
+       this.then = now - (this.elapsed % this.fpsInterval);
 
        // Put your drawing code here
-      this.animateObjects();
+       console.log("TIME",now, this.startTime)
+      this.animateObjects(now);
 
    }
 
@@ -144,26 +152,86 @@ animate() {
 
 }
 
+currentAniTime(now) {
+  return now - this.startTime;
+}
 
-animateObjects() {
-console.log(this.now);
-    this.playFile.comps[this.playFile.currentComp].comp.forEach(currentComp => {
+
+animateObjects(now) {
+//console.log(this.now);
+    let canvasObjects = this.canvas.getObjects();
+    canvasObjects.forEach(currentComp => {
       currentComp.effects.forEach(effect => {
 
+
+
+
+    
         let timeStart = effect.start * 1000;
         let timeEnd = effect.end * 1000;
 
+        let objectWidth = Math.abs(currentComp.aCoords.tl.x - currentComp.aCoords.tr.x);
+        let objectHeight = currentComp.aCoords.tl.y - currentComp.aCoords.bl.y;
+
+        let currentStartLeft:number = (objectWidth/2) * -1;
+        console.log("currentStartLeft", objectWidth, currentStartLeft);
+        let currentStartTop:number = currentComp.top;
+
+        let currentEndLeft = currentComp.left;
+        let currentEndTop = currentComp.top;
+      
+
+        
+        //////////////////////
+        ////Move In
+        //////////////////
         if(effect.type === "Move In"){
 
-          //Set beginning placement      
-          // if(timeStart > this.currentAniTime(startTime, now)){
-          //   element.x = effect.xS;
-          //   element.y = effect.yS;
+          //Set beginning placement, testing, need to account for other positions
+
+          //if(timeStart > this.currentAniTime(now)){
+          // if(timeStart > this.currentAniTime(now)){
+            
+            //currentComp.left = currentStartLeft;
+            currentComp.set("left",currentStartLeft);
+            //currentComp.top = currentStartTop;
+            currentComp.set("top",currentStartTop);
+            console.log("First Placement: ", currentStartLeft, currentStartTop);
+            this.canvas.renderAll();
           // }
+
+          //Start Moving  
+          if(timeStart < this.currentAniTime(now) && timeEnd > this.currentAniTime(now)){
+            //let current = this.currentAniTime() - timeStart;
+            let current = this.currentAniTime(now);
+            console.log("Current Time: " + this.currentAniTime(now));
+            let aniPercentDone = current / (timeEnd - timeStart);
+            let totalDistanceX = currentEndLeft - currentStartLeft;
+            let totalDistanceY = currentEndTop - currentStartTop;
+
+            console.log("%" ,aniPercentDone);
+            console.log("tdx" ,totalDistanceX);
+            console.log("tdy" ,totalDistanceY);
+            console.log("currentStartLeft" ,currentStartLeft);
+            console.log("equation" ,(totalDistanceX * aniPercentDone) + currentStartLeft);
+
+
+            currentComp.set("left",(totalDistanceX * aniPercentDone) + currentStartLeft);
+
+            console.log("What so farY: " + totalDistanceY * aniPercentDone);
+         
+            currentComp.set("top",(totalDistanceY * aniPercentDone) + currentStartTop);
+
+          }
+
+
+
+
 
          
           
         }
+        this.canvas.renderAll();
       // if(canvasObj.id === fileObj.id) {
         
       //   found = true;
@@ -268,7 +336,8 @@ console.log(this.now);
             left: options.target.left,
             top: options.target.top,
 
-            scaleC: 100, //need to fix this maybe
+            scaleXC: options.target.scaleX, //need to fix this maybe
+            scaleYC: options.target.scaleY, //need to fix this maybe
             alphaC: 100,
             widthC: options.target.width,
             heightC: options.target.height,
@@ -302,7 +371,8 @@ console.log(this.now);
             left: options.target.left,
             top: options.target.top,
 
-            scaleC: 100, //need to fix this maybe
+            scaleXC: options.target.scaleX, //need to fix this maybe
+            scaleYC: options.target.scaleY, //need to fix this maybe
             alphaC: 100,
             widthC: options.target.width,
             heightC: options.target.height,
@@ -503,10 +573,10 @@ console.log(this.now);
   
   }
 
-  createObj(obj) {
+  createObj(obj:IComp) {
     if(obj.type === "TEXT") {
           console.log("Create Object Ran: " + obj.copy);
-          let text = this.fabric.Textbox(obj.copy, obj.left, obj.top, obj.id, obj.color,obj.zdepth,obj.widthC,obj.heightC);
+          let text = this.fabric.Textbox(obj.copy, obj.left, obj.top, obj.id, obj.color,obj.zdepth,obj.widthC,obj.heightC,obj.scaleXC,obj.scaleYC);
           this.canvas.add(text);
           this.canvas.renderAll();
         }

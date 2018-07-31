@@ -11,7 +11,8 @@ export interface IComp {
     left: number;
     top: number;
 
-    scaleC: number;
+    scaleXC: number;
+    scaleYC: number;
     alphaC: number;
     widthC: number;
     heightC: number;

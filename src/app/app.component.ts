@@ -39,8 +39,11 @@ export class AppComponent implements AfterViewInit {
               left: 0,
               top: 0,
 
+              scaleXC: 1,
+              scaleYC: 1,
               heightC: 22.599999999999998,
-              widthC: 40,
+              widthC: 50.83999938964844,
+              
 
               zdepth: 2,
               color: "red",
@@ -60,8 +63,10 @@ export class AppComponent implements AfterViewInit {
               left: 20,
               top: 50,
 
+              scaleXC: 1,
+              scaleYC: 1,
               heightC: 22.599999999999998,
-              widthC: 40,
+              widthC: 52.38000030517578,
 
               zdepth: 1,
               color: "green",
@@ -87,8 +92,10 @@ export class AppComponent implements AfterViewInit {
               left: 90,
               top: 50,
 
+              scaleXC: 1,
+              scaleYC: 1,
               heightC: 22.599999999999998,
-              widthC: 80,
+              widthC: 53.16000061035157,
 
               zdepth: 0,
               color: "blue",
@@ -120,8 +127,10 @@ export class AppComponent implements AfterViewInit {
               left: 20,
               top: 20,
 
+              scaleXC: 1,
+              scaleYC: 1,
               heightC: 22.599999999999998,
-              widthC: 40,
+              widthC: 50.83999938964844,
 
               effects: []
             },
@@ -188,7 +197,8 @@ playFileUpdate(update:IComp){
     currentObj.left = update.left;
     currentObj.top = update.top;
 
-    currentObj.scaleC = update.left;
+    currentObj.scaleXC = update.scaleXC;
+    currentObj.scaleYC = update.scaleYC;
     currentObj.alphaC = update.alphaC;
     currentObj.widthC = update.widthC;
     currentObj.heightC = update.heightC;
@@ -206,7 +216,7 @@ playFileUpdate(update:IComp){
     //this.playFile = updatePlayFile;
   }
   
-  console.log(this.playFile);
+  console.log("look test",this.playFile);
 }
 
 

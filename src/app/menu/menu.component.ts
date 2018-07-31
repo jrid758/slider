@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit, Output, EventEmitter, Input } from '@angular/core';
 import { IComp } from '../comp';
+import { IEffect } from "../effectI";
 
 
 @Component({
@@ -55,10 +56,13 @@ export class MenuComponent implements OnInit, AfterViewInit {
       left: 30,
       top: 30,
 
-      scaleC: 100,
-      alphaC: 100,
+
+
+      scaleXC: 1,
+      scaleYC: 1,
       widthC: 40,
       heightC: 22.599999999999998,
+      alphaC: 1,
 
       zdepth: 3,
       color: "purple",
