@@ -106,12 +106,30 @@ firstTimeThru;
 
 // initialize the timer variables and start the animation
 
-startAnimating(fps = 5) {
+setupObjectsForAnimation() {
+  let canvasObjects = this.canvas.getObjects();
+  canvasObjects.forEach(currentComp => {
+    currentComp.actualWidth = Math.abs(currentComp.aCoords.tl.x - currentComp.aCoords.tr.x);
+    currentComp.actualHeight = Math.abs(currentComp.aCoords.tl.y - currentComp.aCoords.bl.y);
+
+    currentComp.currentStartLeft = (currentComp.actualWidth/2) * -1;
+    currentComp.currentStartTop = currentComp.top;
+       
+    currentComp.currentEndLeft = currentComp.left;
+    currentComp.currentEndTop = currentComp.top;
+  
+  });
+
+}
+
+
+startAnimating(fps = 60) {
     this.fpsInterval = 1000 / fps;
     this.then = Date.now();
     this.startTime = this.then;
     this.firstTimeThru = true;
     console.log("start",this.startTime);
+    this.setupObjectsForAnimation();
     this.animate();
 }
 
@@ -148,7 +166,7 @@ animate() {
 
    }
 
-
+   console.log("TIME2",now, this.startTime)
 
 }
 
@@ -170,15 +188,15 @@ animateObjects(now) {
         let timeStart = effect.start * 1000;
         let timeEnd = effect.end * 1000;
 
-        let objectWidth = Math.abs(currentComp.aCoords.tl.x - currentComp.aCoords.tr.x);
-        let objectHeight = currentComp.aCoords.tl.y - currentComp.aCoords.bl.y;
+        // let objectWidth = Math.abs(currentComp.aCoords.tl.x - currentComp.aCoords.tr.x);
+        // let objectHeight = currentComp.aCoords.tl.y - currentComp.aCoords.bl.y;
 
-        let currentStartLeft:number = (objectWidth/2) * -1;
-        console.log("currentStartLeft", objectWidth, currentStartLeft);
-        let currentStartTop:number = currentComp.top;
+        // let currentStartLeft:number = (currentComp.objectWidth/2) * -1;
+        // let currentStartTop:number = currentComp.top;
+        // console.log("currentStartLeft", currentComp.objectWidth, currentStartLeft);
 
-        let currentEndLeft = currentComp.left;
-        let currentEndTop = currentComp.top;
+        // let currentEndLeft = currentComp.left;
+        // let currentEndTop = currentComp.top;
       
 
         
@@ -190,15 +208,15 @@ animateObjects(now) {
           //Set beginning placement, testing, need to account for other positions
 
           //if(timeStart > this.currentAniTime(now)){
-          // if(timeStart > this.currentAniTime(now)){
-            
+          if(this.firstTimeThru){
+            this.firstTimeThru = false;
             //currentComp.left = currentStartLeft;
-            currentComp.set("left",currentStartLeft);
+            currentComp.set("left",currentComp.currentStartLeft);
             //currentComp.top = currentStartTop;
-            currentComp.set("top",currentStartTop);
-            console.log("First Placement: ", currentStartLeft, currentStartTop);
-            this.canvas.renderAll();
-          // }
+            currentComp.set("top",currentComp.currentStartTop);
+            //console.log("First Placement: ", currentStartLeft, currentStartTop);
+            //this.canvas.renderAll();
+          } else {
 
           //Start Moving  
           if(timeStart < this.currentAniTime(now) && timeEnd > this.currentAniTime(now)){
@@ -206,22 +224,22 @@ animateObjects(now) {
             let current = this.currentAniTime(now);
             console.log("Current Time: " + this.currentAniTime(now));
             let aniPercentDone = current / (timeEnd - timeStart);
-            let totalDistanceX = currentEndLeft - currentStartLeft;
-            let totalDistanceY = currentEndTop - currentStartTop;
+            let totalDistanceX = currentComp.currentEndLeft - currentComp.currentStartLeft;
+            let totalDistanceY = currentComp.currentEndTop - currentComp.currentStartTop;
 
             console.log("%" ,aniPercentDone);
             console.log("tdx" ,totalDistanceX);
             console.log("tdy" ,totalDistanceY);
-            console.log("currentStartLeft" ,currentStartLeft);
-            console.log("equation" ,(totalDistanceX * aniPercentDone) + currentStartLeft);
+            console.log("currentStartLeft" ,currentComp.currentStartLeft);
+            console.log("equation" ,(totalDistanceX * aniPercentDone) + currentComp.currentStartLeft);
 
 
-            currentComp.set("left",(totalDistanceX * aniPercentDone) + currentStartLeft);
+            currentComp.set("left",(totalDistanceX * aniPercentDone) + currentComp.currentStartLeft);
 
             console.log("What so farY: " + totalDistanceY * aniPercentDone);
          
-            currentComp.set("top",(totalDistanceY * aniPercentDone) + currentStartTop);
-
+            currentComp.set("top",(totalDistanceY * aniPercentDone) + currentComp.currentStartTop);
+             }
           }
 
 
